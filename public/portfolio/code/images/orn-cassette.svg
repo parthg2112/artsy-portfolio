@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="78" height="56" viewBox="0 0 78 56" fill="none">
+  <title>A cassette tape</title>
+  <defs>
+    <linearGradient id="tapeBody" x1="6" y1="4" x2="66" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF7A2B"/>
+      <stop offset="0.6" stop-color="#FF5E00"/>
+      <stop offset="1" stop-color="#D24C00"/>
+    </linearGradient>
+    <linearGradient id="tapeLabel" x1="14" y1="8" x2="60" y2="26" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7F2E6"/>
+      <stop offset="1" stop-color="#E0D9C2"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="2.4" y="2.4" width="73.2" height="51.2" rx="6" fill="url(#tapeBody)" stroke="#3B4AD6" stroke-width="2.6"/>
+  <rect x="10" y="7" width="58" height="19" rx="3" fill="url(#tapeLabel)" stroke="#3B4AD6" stroke-width="1.6"/>
+  <path d="M15 13h34M15 18h24" stroke="#3B4AD6" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Reel window. Rendered ~96px wide, so the reels carry the read: they need a dark
+       surround and enough radius to survive at that size. -->
+  <rect x="12" y="29" width="54" height="20" rx="3" fill="#3B4AD6" opacity="0.5"/>
+  <circle cx="26" cy="39" r="7.4" fill="#F7F2E6" stroke="#3B4AD6" stroke-width="2.2"/>
+  <circle cx="52" cy="39" r="7.4" fill="#F7F2E6" stroke="#3B4AD6" stroke-width="2.2"/>
+  <circle cx="26" cy="39" r="2.6" fill="#3B4AD6"/>
+  <circle cx="52" cy="39" r="2.6" fill="#3B4AD6"/>
+  <path d="M33.5 39h11" stroke="#F7F2E6" stroke-width="2" opacity="0.9"/>
+</svg>

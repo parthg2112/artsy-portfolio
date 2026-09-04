@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="317" height="397" viewBox="0 0 317 397" fill="none">
+  <rect width="317" height="397" fill="#fbf3d4"/>
+  <rect x="10" y="10" width="297" height="377" fill="none" stroke="#dfd7a4" stroke-width="2"/>
+  <rect x="16" y="16" width="285" height="365" fill="none" stroke="#dfd7a4" stroke-width="1" stroke-dasharray="4 5"/>
+
+  <!-- header rules -->
+  <g fill="#3B4AD6">
+    <rect x="30" y="34" width="86" height="7" rx="3.5"/>
+    <rect x="30" y="48" width="52" height="5" rx="2.5" opacity="0.55"/>
+  </g>
+  <text x="30" y="76" font-family="ui-monospace, monospace" font-size="13" letter-spacing="2.5" fill="#3B4AD6">CASE / DEV-0417</text>
+
+  <!-- redaction bars -->
+  <rect x="30" y="90" width="182" height="15" fill="#3B4AD6"/>
+  <rect x="30" y="112" width="118" height="15" fill="#3B4AD6"/>
+  <rect x="156" y="112" width="46" height="15" fill="#3B4AD6" opacity="0.4"/>
+
+  <!-- faint monospace rule lines -->
+  <g stroke="#ded6a0" stroke-width="2" stroke-linecap="round">
+    <path d="M30 142h228"/><path d="M30 156h196"/><path d="M30 170h240"/>
+    <path d="M30 184h164"/><path d="M30 198h214"/>
+    <path d="M30 300h188"/><path d="M30 314h230"/><path d="M30 328h142"/>
+  </g>
+  <g stroke="#FF5E00" stroke-width="2" stroke-linecap="round" opacity="0.6">
+    <path d="M30 212h96"/>
+  </g>
+
+  <!-- stamp ring -->
+  <g transform="rotate(-13 206 244)">
+    <circle cx="206" cy="244" r="52" fill="none" stroke="#FF5E00" stroke-width="6" opacity="0.9"/>
+    <circle cx="206" cy="244" r="41" fill="none" stroke="#FF5E00" stroke-width="2.4" opacity="0.75"/>
+    <text x="206" y="238" font-family="ui-monospace, monospace" font-size="16" font-weight="700" letter-spacing="2" fill="#FF5E00" text-anchor="middle">CLASS</text>
+    <text x="206" y="258" font-family="ui-monospace, monospace" font-size="16" font-weight="700" letter-spacing="2" fill="#FF5E00" text-anchor="middle">IFIED</text>
+    <path d="M172 268h68" stroke="#FF5E00" stroke-width="2.4" stroke-linecap="round"/>
+  </g>
+
+  <!-- braces mark -->
+  <text x="52" y="262" font-family="ui-monospace, monospace" font-size="46" font-weight="700" fill="#3B4AD6" opacity="0.85">{ }</text>
+
+  <!-- barcode strip (raised so the overlaid "Internal use only" line stays legible) -->
+  <g fill="#3B4AD6" transform="translate(0,-58)" opacity="0.75">
+    <rect x="30" y="346" width="3" height="30"/><rect x="36" y="346" width="6" height="30"/>
+    <rect x="45" y="346" width="2" height="30"/><rect x="50" y="346" width="5" height="30"/>
+    <rect x="58" y="346" width="3" height="30"/><rect x="64" y="346" width="2" height="30"/>
+    <rect x="69" y="346" width="7" height="30"/><rect x="79" y="346" width="3" height="30"/>
+    <rect x="85" y="346" width="2" height="30"/><rect x="90" y="346" width="6" height="30"/>
+    <rect x="99" y="346" width="3" height="30"/><rect x="105" y="346" width="4" height="30"/>
+    <rect x="112" y="346" width="2" height="30"/><rect x="117" y="346" width="6" height="30"/>
+    <rect x="126" y="346" width="3" height="30"/><rect x="132" y="346" width="2" height="30"/>
+    <rect x="137" y="346" width="5" height="30"/><rect x="145" y="346" width="3" height="30"/>
+  </g>
+  <text x="200" y="370" font-family="ui-monospace, monospace" font-size="12" letter-spacing="2" fill="#3B4AD6" opacity="0.8">NO. 04·17</text>
+</svg>

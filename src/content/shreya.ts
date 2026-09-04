@@ -4,12 +4,14 @@ const GITHUB = "https://github.com/ShreyaChourasia";
 
 /**
  * Hero word boxes are measured, not guessed: each `width` is the rendered width at
- * 106px Instrument Serif / -3.18px tracking, times ~1.2 for the airy spacing the
+ * 106px Instrument Serif / -3.18px tracking, times ~1.28 for the airy spacing the
  * design uses. The four rows must each stay under the 990px container (gap 16px):
- *   260+140+388 +32 = 820 | 544+68+184 +32 = 828
+ *   260+140+388 +32 = 820 | 473+68+184 +32 = 757
  *   460+140+330 +32 = 962 | 140+730+69  +32 = 971
- * Change a word and you must re-measure and re-check those sums - `hero.rows` sets
- * the container height as rows * 136.
+ * There are no explicit breaks - the rows come from wrapping, so a box that is too
+ * NARROW is also a bug: row 2 has 233px spare and the next slot needs 476, which is
+ * what keeps it on its own line. Re-measure and re-check both bounds after any edit;
+ * `hero.rows` sets the container height as rows * 136.
  */
 export const content: PortfolioContent = {
   name: "Shreya Chourasia",
@@ -40,13 +42,13 @@ export const content: PortfolioContent = {
 
   hero: {
     rows: 4,
-    ariaLabel: "AI/ML engineer, C++ systems and automation building things that think",
+    ariaLabel: "AI/ML engineer, applied ML and automation building things that think",
     slots: [
       { kind: "word", word: { text: "AI/ML", width: 260 } },
       { kind: "chip", slot: 0 },
       { kind: "word", word: { text: "engineer,", width: 388 } },
 
-      { kind: "word", word: { text: "C++ systems", width: 544 } },
+      { kind: "word", word: { text: "applied ML", width: 473 } },
       { kind: "emoji", icon: "outline", size: 68 },
       { kind: "word", word: { text: "and", width: 184 } },
 
@@ -99,25 +101,44 @@ export const content: PortfolioContent = {
     {
       index: "01",
       title: "Machine Learning",
+      // Breast Cancer ML - the classifier comparison this row describes.
+      coverIndex: 1,
       description:
         "Training and evaluating models on real datasets. Preprocessing, balancing, and comparing classifiers until the numbers actually mean something.",
     },
     {
       index: "02",
       title: "Systems & Algorithms",
+      // Atlas Pathfinder - the A* graph search over real streets.
+      coverIndex: 0,
       description:
-        "Graph search, pathfinding and data structures in modern C++, built for real-world scale and measured rather than assumed.",
+        "Graph search and pathfinding over real street networks, sized for real-world data and measured rather than assumed.",
     },
     {
       index: "03",
       title: "Automation",
+      // n8n Workflows.
+      coverIndex: 4,
       description:
         "n8n workflows that wire Gmail, Sheets, Slack and LLMs together so the repetitive work runs itself.",
     },
   ],
 
   aboutStatement:
-    "I like problems where the answer has to be built rather than looked up. A graph that needs searching, a dataset that needs interrogating, a workflow that should have automated itself months ago. Most of what I know, I learned by shipping it.",
+    "I like problems where the answer has to be built rather than looked up. A graph that needs searching, a workflow that should have automated itself months ago. Most of what I know, I learned by shipping it.",
+
+  fullBleed: {
+    title: "I broke it first",
+    hint: "Keep scrolling",
+    line: "Everything here started as something that did not work yet.",
+  },
+
+  sectionIndex: [
+    { label: "Work", href: "#work" },
+    { label: "About", href: "#about" },
+    { label: "Skills", href: "#skills" },
+    { label: "Contact", href: "#contact" },
+  ],
 
   about: {
     heading: "Hi, I'm Shreya. Nice to meet you!",
@@ -129,17 +150,8 @@ export const content: PortfolioContent = {
     ],
     paragraphTwo:
       "Most of my projects start as a question I could not answer by reading, and end as a repository.",
-    dossier: {
-      copy: [
-        "This document is classified and intended solely for authorized personnel.",
-        "Access grants you an unreasonable quantity of commits, notebooks and half-finished workflows.",
-        "By continuing, you acknowledge that most of this was learned by breaking it first.",
-        ".…",
-      ],
-      stampLabel: "DO NOT OPEN",
-      // Renders in an 86px two-line box, so it must break at a space, not mid-word.
-      brand: "code by shreya",
-    },
+    /** Caption on the taped polaroid; picks up the question in paragraph two. */
+    noteCaption: "still asking the question",
   },
 
   contact: {

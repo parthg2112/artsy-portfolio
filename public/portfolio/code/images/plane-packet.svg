@@ -1,16 +1,43 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600" fill="none">
-  <g transform="translate(-2 48)">
-    <g transform="rotate(-16 372 252)" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M40 252H199" stroke="#FF5E00" stroke-width="15"/>
-      <path d="M85 166H199" stroke="#FF5E00" stroke-width="13"/>
-      <path d="M110 338H199" stroke="#FF5E00" stroke-width="13"/>
-      <path d="M279 107H465C494 107 517 130 517 159V345C517 374 494 397 465 397H279C250 397 227 374 227 345V159C227 130 250 107 279 107Z" fill="#F7F2E6" stroke="#FF5E00" stroke-width="15"/>
-      <path d="M245 135L372 240L499 135" stroke="#3B4AD6" stroke-width="11" fill="none"/>
-      <g stroke="#3B4AD6" stroke-width="10" fill="none">
-        <path d="M340 278C328 283 333 296 331 308C330 317 326 321 318 323C326 326 330 330 331 339C333 351 328 364 340 369"/>
-        <path d="M404 278C416 283 411 296 413 308C414 317 418 321 426 323C418 326 414 330 413 339C411 351 416 364 404 369"/>
-      </g>
-      <circle cx="372" cy="323" r="5.5" fill="#3B4AD6"/>
-    </g>
+  <title>A paper plane in flight</title>
+  <!-- No outline anywhere. The reference reads as painted because the form is carried
+       entirely by facet shading; an ink contour is exactly what makes a shape look
+       drawn by a machine. Every tone is a tint of paper so the palette script keeps
+       the shading relationships when it recolours. -->
+  <defs>
+    <linearGradient id="planeTop" x1="200" y1="150" x2="470" y2="290" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FBF8F0"/>
+      <stop offset="0.55" stop-color="#F7F2E6"/>
+      <stop offset="1" stop-color="#E7DECA"/>
+    </linearGradient>
+    <linearGradient id="planeLow" x1="250" y1="300" x2="500" y2="410" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#DED3BC"/>
+      <stop offset="1" stop-color="#C6B99C"/>
+    </linearGradient>
+    <linearGradient id="planeKeel" x1="190" y1="160" x2="265" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#EFE7D6"/>
+      <stop offset="1" stop-color="#CDC0A4"/>
+    </linearGradient>
+    <radialGradient id="planeShade" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#3B4AD6" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#3B4AD6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <g transform="rotate(-14 330 285)">
+    <ellipse cx="335" cy="440" rx="155" ry="24" fill="url(#planeShade)"/>
+
+    <!-- slipstream: the one brand mark on the plane, weight falling off with distance -->
+    <path d="M56 236h124" stroke="#FF5E00" stroke-width="14" stroke-linecap="round"/>
+    <path d="M96 170h88" stroke="#FF5E00" stroke-width="10" stroke-linecap="round" opacity="0.75"/>
+    <path d="M118 320h68" stroke="#FF5E00" stroke-width="7" stroke-linecap="round" opacity="0.5"/>
+
+    <path d="M524 250 188 144l76 162Z" fill="url(#planeTop)"/>
+    <path d="M524 250 264 306l-42 110Z" fill="url(#planeLow)"/>
+    <path d="M264 306 188 144l34 272Z" fill="url(#planeKeel)"/>
+
+    <!-- centre crease: a tonal seam, not a line -->
+    <path d="M524 250 264 306l-3-9Z" fill="#B9AA8C" opacity="0.55"/>
+    <path d="M264 306 188 144l6 1Z" fill="#B9AA8C" opacity="0.4"/>
   </g>
 </svg>

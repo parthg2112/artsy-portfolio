@@ -89,13 +89,21 @@ export const originalPack: AssetPack = {
   portraits: {
     about: { src: `${I}/c1urHDvdJ5LuNmIGDP1Yh6NLg.png`, width: 240, height: 260 },
     cta: { src: `${I}/KckiBhuA4HlKUV7pYLYqYmKTDI.png`, width: 500, height: 560 },
+    // The reference site has no equivalent prop; its about portrait keeps the layout
+    // identical so /about still measures the same in both variants.
+    note: { src: `${I}/c1urHDvdJ5LuNmIGDP1Yh6NLg.png`, width: 210, height: 210 },
   },
 
   divider: { src: `${I}/deROsZPeaxkyMaMV80RdrcQx8.png`, width: 400, height: 115 },
 
+  // The reference site has no full-bleed image; its lens collage keeps /original's
+  // section count and page height matched to ours so the parity gate still holds.
+  fullBleed: { src: `${I}/Lu6zMPRaT9J3XR7blsZVLf4I.png`, width: 1360, height: 720 },
+
   aboutHero: {
     dossierCover: `${I}/ClmCPeMxbi3vTbEBXUhYHH6rYKM.jpg`,
-    stamp: `${I}/IusE41NtiW6KCjpFPZMl2DUbSQE.png`,
+    // No equivalent in the reference set; reuse the cover so the card still renders.
+    artReveal: `${I}/ClmCPeMxbi3vTbEBXUhYHH6rYKM.jpg`,
     lensDesktop: `${I}/Lu6zMPRaT9J3XR7blsZVLf4I.png`,
     lensMobile: `${I}/xttaEzD6SLtzQX9aOMIfexOq0.png`,
     lensAlt: "Studio collage",

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="76" height="108" viewBox="0 0 76 108" fill="none">
+  <path d="M38 4 68 27v72a7 7 0 0 1-7 7H15a7 7 0 0 1-7-7V27L38 4Z" fill="#3B4AD6"/>
+  <circle cx="38" cy="26" r="5.5" fill="#ffffff"/>
+  <text x="38" y="79" font-family="ui-monospace, monospace" font-size="34" font-weight="700" fill="#ffffff" text-anchor="middle">{ }</text>
+  <path d="M17 92h42" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" opacity="0.65"/>
+</svg>

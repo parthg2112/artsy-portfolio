@@ -11,13 +11,18 @@ export const codePack: AssetPack = {
   id: "code",
   label: "Code",
 
+  // Five objects, not six glyphs. The reference hangs things with weight and texture,
+  // and its ornaments read as separate because they carry soft transparent margins;
+  // ours are crisp edge to edge, so they need real gaps instead. Every x-range here is
+  // disjoint (29px between each) and the string lengths vary so nothing lines up.
+  // This layer is `absolute inset-0 pointer-events-none`, so it is outside the parity
+  // gate - moving these cannot shift a measured landmark.
   heroOrnaments: [
-    { src: `${I}/orn-braces.svg`, left: 178, top: -52, width: 101.5, height: 148.6, stringLength: 210, zIndex: 1 },
-    { src: `${I}/orn-semicolon.svg`, left: 271, top: -52, width: 39.6, height: 143.9, stringLength: 96, zIndex: 2 },
-    { src: `${I}/orn-hash.svg`, left: 323, top: -52, width: 74.6, height: 73.6, stringLength: 118, zIndex: 2 },
-    { src: `${I}/orn-terminal.svg`, left: 308, top: -52, width: 230.3, height: 124.5, stringLength: 183, zIndex: 1 },
-    { src: `${I}/orn-arrow.svg`, left: 452, top: -52, width: 75.1, height: 57.6, stringLength: 98, zIndex: 2 },
-    { src: `${I}/orn-asterisk.svg`, left: 511, top: -52, width: 97.6, height: 94.2, stringLength: 156, zIndex: 1 },
+    { src: `${I}/orn-photo-a.svg`, left: 150, top: -52, width: 92, height: 98.4, stringLength: 196, zIndex: 1 },
+    { src: `${I}/orn-bulb.svg`, left: 271, top: -52, width: 74, height: 118.4, stringLength: 118, zIndex: 2 },
+    { src: `${I}/orn-leaf.svg`, left: 374, top: -52, width: 66, height: 109.2, stringLength: 168, zIndex: 1 },
+    { src: `${I}/orn-photo-b.svg`, left: 469, top: -52, width: 78, height: 83.7, stringLength: 96, zIndex: 2 },
+    { src: `${I}/orn-cassette.svg`, left: 576, top: -52, width: 96, height: 68.9, stringLength: 146, zIndex: 1 },
   ],
 
   heroDoodles: [
@@ -76,13 +81,16 @@ export const codePack: AssetPack = {
   portraits: {
     about: { src: `${I}/photo-about.jpg`, width: 240, height: 260 },
     cta: { src: `${I}/photo-cta.jpg`, width: 500, height: 560 },
+    note: { src: `${I}/photo-note.jpg`, width: 210, height: 210 },
   },
 
   divider: { src: `${I}/divider-rule.svg`, width: 400, height: 115 },
 
+  fullBleed: { src: `${I}/photo-wide.jpg`, width: 1440, height: 900 },
+
   aboutHero: {
-    dossierCover: `${I}/dossier-cover.svg`,
-    stamp: `${I}/dossier-stamp.svg`,
+    dossierCover: `${I}/art-about.jpg`,
+    artReveal: `${I}/art-about-reveal.jpg`,
     // Photo composites, not vector: line-art under the lens' 5px blur barely reads as
     // blurred, so the drag-to-reveal needs a real photographic subject underneath.
     lensDesktop: `${I}/collage-desktop.png`,

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="58" height="96" viewBox="0 0 58 96" fill="none">
+  <title>A sprig of leaves</title>
+  <defs>
+    <linearGradient id="leafA" x1="6" y1="20" x2="30" y2="46" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#EBECB0"/>
+      <stop offset="1" stop-color="#C9C878"/>
+    </linearGradient>
+    <linearGradient id="leafB" x1="30" y1="30" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F3F1C8"/>
+      <stop offset="1" stop-color="#D6D88C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Stem tapers top to bottom; leaves sit along its whole length so it never reads
+       as a bare stick hanging from the string. -->
+  <path d="M29 6v26" stroke="#3B4AD6" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="M29 32v26" stroke="#3B4AD6" stroke-width="2.3" stroke-linecap="round"/>
+  <path d="M29 58v30" stroke="#3B4AD6" stroke-width="2.9" stroke-linecap="round"/>
+
+  <!-- upper left -->
+  <path d="M29 30c-4.6-1.2-9.8-3.8-12.2-8.4-1.2-2.3-1.5-5-1.1-7.6 3.4.5 7 1.7 9.7 3.9 3.1 2.6 4.3 7.2 3.6 12.1Z"
+        fill="url(#leafA)" stroke="#3B4AD6" stroke-width="1.8"/>
+  <!-- middle right, the largest -->
+  <path d="M29 56c6-1.8 12.8-5.6 15.8-12.4 1.5-3.3 1.7-7 1-10.5-4.3.9-9 2.8-12.3 6-3.9 3.7-5.3 10.3-4.5 16.9Z"
+        fill="url(#leafB)" stroke="#3B4AD6" stroke-width="2"/>
+  <!-- lower left -->
+  <path d="M29 82c-5.4-1.6-11.4-5-13.9-11-1.3-3-1.5-6.3-.9-9.4 3.8.8 8 2.5 10.9 5.3 3.5 3.3 4.7 9.1 3.9 15.1Z"
+        fill="url(#leafA)" stroke="#3B4AD6" stroke-width="2"/>
+
+  <!-- veins, lighter than the outlines -->
+  <path d="M28 28c-3.2-2.4-6.4-5.4-8.2-9M30 54c3.6-2.8 6.8-6.2 8.8-10.4M28 80c-3.6-2.8-7-6.4-9-10.6"
+        stroke="#3B4AD6" stroke-width="1" stroke-linecap="round" opacity="0.55"/>
+</svg>

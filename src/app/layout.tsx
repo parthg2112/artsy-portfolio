@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import { Gluten, Instrument_Sans, Instrument_Serif, Manjari } from "next/font/google";
+
+import { ClickSpark } from "@/components/portfolio/shared/ClickSpark";
+import { paletteBootScript } from "@/components/portfolio/shared/usePalette";
+
 import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -27,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "AI/ML engineer, C++ systems and automation, building things that think.",
+    "AI/ML engineer, applied ML and automation, building things that think.",
 };
 
 export default function RootLayout({
@@ -40,7 +44,16 @@ export default function RootLayout({
       lang="en"
       className={`${instrumentSerif.variable} ${manjari.variable} ${gluten.variable} ${instrumentSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      {/* No manual <head>: rendering one suppresses Next's own metadata injection, which
+          is what emits the <link rel="icon"> for app/icon.svg. First child of <body>
+          still runs before anything paints, which is all the palette needs. */}
+      <body className="min-h-full flex flex-col">
+        <script dangerouslySetInnerHTML={{ __html: paletteBootScript }} />
+        {children}
+        {/* Viewport-fixed and pointer-events-none, so it draws over every route without
+            intercepting a single click. */}
+        <ClickSpark />
+      </body>
     </html>
   );
 }

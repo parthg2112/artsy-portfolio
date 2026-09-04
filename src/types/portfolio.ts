@@ -35,6 +35,8 @@ export interface Service {
   index: string;
   title: string;
   description: string;
+  /** Index into `AssetPack.projectCovers` - the work shown when this row is hovered. */
+  coverIndex: number;
 }
 
 export interface FooterColumn {
@@ -61,12 +63,17 @@ export interface PortfolioContent {
   projects: Project[];
   services: Service[];
   aboutStatement: string;
+  /** Copy over the full-bleed image that opens between Work and About. */
+  fullBleed: { title: string; hint: string; line: string };
+  /** Right-side section index on the home page; hrefs are in-page anchors. */
+  sectionIndex: { label: string; href: string }[];
   about: {
     heading: string;
     /** Desktop keeps these as authored line breaks; mobile reflows. */
     paragraphOneLines: string[];
     paragraphTwo: string;
-    dossier: { copy: string[]; stampLabel: string; brand: string };
+    /** Caption on the taped polaroid between the paragraphs. */
+    noteCaption: string;
   };
   contact: {
     headingWords: HeadingWord[];
@@ -145,12 +152,17 @@ export interface AssetPack {
   stickers: string[];
   /** One cover per project, in the same order as `content.projects`. */
   projectCovers: ImageAsset[];
-  portraits: { about: ImageAsset; cta: ImageAsset };
+  /** `note` is the taped polaroid that breaks up the /about paragraphs. */
+  portraits: { about: ImageAsset; cta: ImageAsset; note: ImageAsset };
   /** Decorative rule between About and Services. */
   divider: ImageAsset;
+  /** Landscape image for the full-bleed scroll-expand section on the home page. */
+  fullBleed: ImageAsset;
   aboutHero: {
+    /** Art card pinned above the lens collage. */
     dossierCover: string;
-    stamp: string;
+    /** What that card pixel-dissolves into on hover. */
+    artReveal: string;
     lensDesktop: string;
     lensMobile: string;
     lensAlt: string;

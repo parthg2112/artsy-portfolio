@@ -58,12 +58,14 @@
 }
 
 :root {
-  /* Exact sRGB values read off the live site; do not convert to oklch. */
-  --additti-paper: #f7f2e6;
+  /* Blush is the shipped palette, so it lives on bare :root and needs no JS to apply -
+     the page paints correctly before a single script runs. The inherited cream/lime
+     colourway is kept one attribute away as [data-palette="paper"] below. */
+  --additti-paper: #fbeef0;
   --additti-ink: #ff5e00;
   --additti-blue: #3b4ad6;
-  --additti-lime: #ebecb0;
-  --additti-grid: rgb(102 238 241 / 0.7);
+  --additti-lime: #fbf3d4;
+  --additti-grid: rgb(232 168 186 / 0.55);
 
   /* Each block is authored at a fixed size then scaled per breakpoint.
      See docs/research/.../BEHAVIORS.md, Responsive scaling.
@@ -161,6 +163,16 @@
   }
 }
 
+/* The original cream/lime colourway, kept as an override for comparison. Only the
+   grounds differ - the two inks never move, which is what keeps the 106px display type
+   and the line art legible in both. Artwork per colourway lives in
+   public/portfolio/code/ and code-blush/ (see scripts/recolour-palette.mjs). */
+:root[data-palette="paper"] {
+  --additti-paper: #f7f2e6;
+  --additti-lime: #ebecb0;
+  --additti-grid: rgb(102 238 241 / 0.7);
+}
+
 @layer utilities {
   /* Paper-grid texture layered under the whole page. Drawn rather than loaded: the
      spacings below are the reference tile's own numbers scaled by its 441/2755 render
@@ -177,6 +189,181 @@
         var(--additti-grid) 0 0.668px,
         transparent 0.668px 16.166px
       );
+  }
+}
+
+/* ScrollExpand. Kept here rather than in a component stylesheet because this project has
+   exactly one stylesheet; a co-located .css file would be a new convention for one
+   component. Colours come from the palette variables so it follows Paper/Blush. */
+.scroll-expand {
+  position: relative;
+  width: 100%;
+  /* Matches the sibling sections: <main>'s grid texture sits at z-1 and would otherwise
+     be drawn over the image. */
+  z-index: 2;
+}
+
+.scroll-expand__track {
+  position: relative;
+  width: 100%;
+}
+
+.scroll-expand__stage {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  --se-title-size: 4rem;
+}
+
+.scroll-expand__frame {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(21% 29% 21% 29% round 24px);
+  will-change: clip-path;
+}
+
+.scroll-expand__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+  transform-origin: center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.scroll-expand__scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Near-uniform rather than a soft vignette: the title sits mid-frame, which is exactly
+     where a top/bottom gradient is weakest. */
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--additti-blue) 90%, transparent),
+    color-mix(in srgb, var(--additti-blue) 62%, transparent) 45%,
+    color-mix(in srgb, var(--additti-blue) 78%, transparent)
+  );
+  opacity: 0;
+}
+
+.scroll-expand__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-align: center;
+  padding: 6%;
+  opacity: 0;
+  color: var(--additti-paper);
+  will-change: opacity, transform;
+}
+
+.scroll-expand__title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0 6%;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: var(--se-title-size);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  /* Cream on the blue scrim, not ink on skin - orange display type is unreadable over
+     a photograph. */
+  color: var(--additti-paper);
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.scroll-expand__hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1.25rem;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--additti-blue);
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-expand__frame,
+  .scroll-expand__media {
+    will-change: auto;
+  }
+}
+
+/* Right-edge section index. `--effect` (0..1) is eased per item by one rAF loop in JS,
+   so colour, shift and marker length all read the same continuously-animating value
+   instead of racing separate CSS transitions. */
+.section-index__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+}
+
+.section-index__link {
+  --effect: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: color-mix(
+    in srgb,
+    var(--additti-ink) calc(var(--effect) * 100%),
+    color-mix(in srgb, var(--additti-blue) 55%, transparent)
+  );
+  transform: translateX(calc(var(--effect) * -10px));
+}
+
+.section-index__marker {
+  display: block;
+  height: 1px;
+  width: 26px;
+  transform-origin: right center;
+  transform: scaleX(calc(0.55 + var(--effect) * 0.85));
+  background-color: color-mix(
+    in srgb,
+    var(--additti-ink) calc(var(--effect) * 100%),
+    color-mix(in srgb, var(--additti-blue) 40%, transparent)
+  );
+}
+
+.section-index__index {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.6875rem;
+  opacity: calc(0.45 + var(--effect) * 0.55);
+}
+
+.section-index__link[aria-current="true"] .section-index__text {
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-index__link,
+  .section-index__marker {
+    transform: none;
   }
 }
 

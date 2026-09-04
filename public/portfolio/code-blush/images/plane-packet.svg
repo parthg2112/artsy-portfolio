@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600" fill="none">
+  <title>A paper plane in flight</title>
+  <!-- No outline anywhere. The reference reads as painted because the form is carried
+       entirely by facet shading; an ink contour is exactly what makes a shape look
+       drawn by a machine. Every tone is a tint of paper so the palette script keeps
+       the shading relationships when it recolours. -->
+  <defs>
+    <linearGradient id="planeTop" x1="200" y1="150" x2="470" y2="290" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.55" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f7e4ec"/>
+    </linearGradient>
+    <linearGradient id="planeLow" x1="250" y1="300" x2="500" y2="410" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#eed9de"/>
+      <stop offset="1" stop-color="#d5bfbd"/>
+    </linearGradient>
+    <linearGradient id="planeKeel" x1="190" y1="160" x2="265" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f7f4ef"/>
+      <stop offset="1" stop-color="#ddc6c6"/>
+    </linearGradient>
+    <radialGradient id="planeShade" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#3B4AD6" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#3B4AD6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <g transform="rotate(-14 330 285)">
+    <ellipse cx="335" cy="440" rx="155" ry="24" fill="url(#planeShade)"/>
+
+    <!-- slipstream: the one brand mark on the plane, weight falling off with distance -->
+    <path d="M56 236h124" stroke="#FF5E00" stroke-width="14" stroke-linecap="round"/>
+    <path d="M96 170h88" stroke="#FF5E00" stroke-width="10" stroke-linecap="round" opacity="0.75"/>
+    <path d="M118 320h68" stroke="#FF5E00" stroke-width="7" stroke-linecap="round" opacity="0.5"/>
+
+    <path d="M524 250 188 144l76 162Z" fill="url(#planeTop)"/>
+    <path d="M524 250 264 306l-42 110Z" fill="url(#planeLow)"/>
+    <path d="M264 306 188 144l34 272Z" fill="url(#planeKeel)"/>
+
+    <!-- centre crease: a tonal seam, not a line -->
+    <path d="M524 250 264 306l-3-9Z" fill="#c8b0ad" opacity="0.55"/>
+    <path d="M264 306 188 144l6 1Z" fill="#c8b0ad" opacity="0.4"/>
+  </g>
+</svg>

@@ -1,0 +1,286 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1360" height="720" viewBox="0 0 1360 720" fill="none">
+  <defs>
+    <pattern id="gp" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0v26" fill="none" stroke="#f4e2e6" stroke-width="1"/>
+    </pattern>
+    <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="#3B4AD6" opacity="0.35"/>
+    </pattern>
+    <g id="nd"><circle r="9" fill="#3B4AD6"/><circle r="3.4" fill="#ffffff"/></g>
+    <g id="ndo"><circle r="9" fill="#FF5E00"/><circle r="3.4" fill="#ffffff"/></g>
+    <g id="ast" stroke="#3B4AD6" stroke-width="3.4" stroke-linecap="round">
+      <path d="M0-9v18"/><path d="M-8-4.5 8 4.5"/><path d="M8-4.5-8 4.5"/>
+    </g>
+  </defs>
+
+  <rect width="1360" height="720" fill="#ffffff"/>
+  <rect width="1360" height="720" fill="url(#gp)"/>
+
+  <!-- long background wires -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M-10 168c150 0 210 60 330 60s180-70 300-70 210 90 340 90 260-50 410-50" stroke="#3B4AD6" stroke-width="2.4" stroke-dasharray="9 9" opacity="0.35"/>
+    <path d="M-10 560c180-20 240 44 400 44s220-90 380-90 250 70 400 70 200-30 200-30" stroke="#FF5E00" stroke-width="2.4" stroke-dasharray="4 10" opacity="0.4"/>
+    <path d="M170-10c0 120 46 150 46 250s-70 140-70 250 40 130 40 240" stroke="#3B4AD6" stroke-width="2" stroke-dasharray="6 8" opacity="0.25"/>
+    <path d="M1090-10c0 140-60 170-60 280s80 150 80 260-24 100-24 200" stroke="#3B4AD6" stroke-width="2" stroke-dasharray="6 8" opacity="0.22"/>
+  </g>
+
+  <!-- big faint brackets -->
+  <text x="1146" y="704" font-family="ui-monospace, monospace" font-size="150" font-weight="700" fill="#FF5E00" opacity="0.14">{ }</text>
+  <text x="18" y="250" font-family="ui-monospace, monospace" font-size="130" font-weight="700" fill="#3B4AD6" opacity="0.1">//</text>
+
+  <!-- ===== terminal A (top-left) ===== -->
+  <g>
+    <rect x="36" y="44" width="392" height="236" fill="#ffffff" stroke="#3B4AD6" stroke-width="3"/>
+    <rect x="36" y="44" width="392" height="30" fill="#3B4AD6"/>
+    <g fill="#ffffff"><circle cx="56" cy="59" r="5"/><circle cx="74" cy="59" r="5"/></g>
+    <circle cx="92" cy="59" r="5" fill="#FF5E00"/>
+    <text x="122" y="64" font-family="ui-monospace, monospace" font-size="13" fill="#ffffff" opacity="0.85">~/src/train.py</text>
+    <g fill="#3B4AD6">
+      <rect x="58" y="96" width="26" height="8" rx="4"/>
+      <rect x="92" y="96" width="96" height="8" rx="4" opacity="0.45"/>
+      <rect x="196" y="96" width="52" height="8" rx="4" opacity="0.45"/>
+      <rect x="78" y="120" width="60" height="8" rx="4" opacity="0.45"/>
+      <rect x="146" y="120" width="128" height="8" rx="4"/>
+      <rect x="78" y="144" width="34" height="8" rx="4" opacity="0.45"/>
+      <rect x="120" y="144" width="82" height="8" rx="4" opacity="0.45"/>
+      <rect x="98" y="168" width="112" height="8" rx="4" opacity="0.45"/>
+      <rect x="218" y="168" width="44" height="8" rx="4"/>
+      <rect x="58" y="192" width="70" height="8" rx="4" opacity="0.45"/>
+      <rect x="58" y="240" width="150" height="8" rx="4" opacity="0.3"/>
+    </g>
+    <g fill="#FF5E00">
+      <rect x="136" y="192" width="86" height="8" rx="4"/>
+      <rect x="58" y="216" width="20" height="8" rx="4"/>
+      <rect x="88" y="216" width="130" height="8" rx="4" opacity="0.5"/>
+      <rect x="228" y="214" width="12" height="13"/>
+    </g>
+  </g>
+
+  <!-- ===== code fragment card (top-center) ===== -->
+  <g transform="rotate(-3 600 112)">
+    <rect x="470" y="42" width="262" height="142" fill="#ffffff" stroke="#3B4AD6" stroke-width="2.4" stroke-dasharray="7 6"/>
+    <text x="486" y="72" font-family="ui-monospace, monospace" font-size="15" fill="#FF5E00">def fit(x, y):</text>
+    <text x="502" y="96" font-family="ui-monospace, monospace" font-size="15" fill="#3B4AD6" opacity="0.8">w = solve(x, y)</text>
+    <text x="502" y="120" font-family="ui-monospace, monospace" font-size="15" fill="#3B4AD6" opacity="0.8">loss = mse(w)</text>
+    <text x="502" y="144" font-family="ui-monospace, monospace" font-size="15" fill="#FF5E00">return w</text>
+    <path d="M486 160h180" stroke="#f0dfe4" stroke-width="2" stroke-linecap="round"/>
+    <path d="M486 172h96" stroke="#f0dfe4" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- ===== sticky note // (top) ===== -->
+  <g transform="rotate(7 820 118)">
+    <rect x="756" y="54" width="132" height="126" fill="#FF5E00"/>
+    <text x="778" y="122" font-family="ui-monospace, monospace" font-size="44" font-weight="700" fill="#ffffff">//</text>
+    <g fill="#ffffff" opacity="0.75">
+      <rect x="776" y="138" width="86" height="6" rx="3"/>
+      <rect x="776" y="152" width="54" height="6" rx="3"/>
+    </g>
+  </g>
+
+  <!-- ===== plot card (right) ===== -->
+  <g>
+    <rect x="946" y="48" width="374" height="252" fill="#ffffff" stroke="#3B4AD6" stroke-width="3"/>
+    <g stroke="#f0dfe4" stroke-width="1.6">
+      <path d="M978 96h316"/><path d="M978 140h316"/><path d="M978 184h316"/><path d="M978 228h316"/>
+    </g>
+    <path d="M978 70v202h316" stroke="#3B4AD6" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M986 258c34-6 52-34 74-52s38-52 66-64 52-6 84-16 44-24 76-30" stroke="#FF5E00" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M986 268c40 4 60-22 86-40s44-24 78-38 60-8 136-38" stroke="#3B4AD6" stroke-width="2.6" stroke-dasharray="7 7" stroke-linecap="round" fill="none"/>
+    <g fill="#3B4AD6">
+      <circle cx="1012" cy="238" r="4"/><circle cx="1046" cy="216" r="4"/><circle cx="1080" cy="192" r="4"/>
+      <circle cx="1114" cy="168" r="4"/><circle cx="1148" cy="150" r="4"/><circle cx="1182" cy="132" r="4"/>
+      <circle cx="1216" cy="120" r="4"/><circle cx="1250" cy="98" r="4"/><circle cx="1284" cy="86" r="4"/>
+      <circle cx="1064" cy="230" r="4" opacity="0.5"/><circle cx="1130" cy="196" r="4" opacity="0.5"/>
+      <circle cx="1200" cy="160" r="4" opacity="0.5"/><circle cx="1262" cy="130" r="4" opacity="0.5"/>
+    </g>
+    <circle cx="1250" cy="98" r="9" fill="none" stroke="#FF5E00" stroke-width="2.6"/>
+    <g>
+      <rect x="1000" y="66" width="14" height="6" rx="3" fill="#FF5E00"/>
+      <rect x="1058" y="66" width="14" height="6" rx="3" fill="#3B4AD6"/>
+      <text x="1020" y="73" font-family="ui-monospace, monospace" font-size="11" fill="#3B4AD6" opacity="0.8">auc</text>
+      <text x="1078" y="73" font-family="ui-monospace, monospace" font-size="11" fill="#3B4AD6" opacity="0.8">base</text>
+    </g>
+  </g>
+
+  <!-- ===== terminal B (center, overlapping) ===== -->
+  <g transform="rotate(2 486 300)">
+    <rect x="300" y="196" width="372" height="208" fill="#fbf3d4" stroke="#FF5E00" stroke-width="3"/>
+    <rect x="300" y="196" width="372" height="28" fill="#FF5E00"/>
+    <g fill="#ffffff"><circle cx="318" cy="210" r="4.6"/><circle cx="334" cy="210" r="4.6"/><circle cx="350" cy="210" r="4.6"/></g>
+    <text x="376" y="215" font-family="ui-monospace, monospace" font-size="12" fill="#ffffff" opacity="0.9">bash - run eval</text>
+    <text x="318" y="252" font-family="ui-monospace, monospace" font-size="14" fill="#3B4AD6">$ make eval --split=test</text>
+    <g fill="#3B4AD6" opacity="0.55">
+      <rect x="318" y="266" width="230" height="7" rx="3.5"/>
+      <rect x="318" y="282" width="164" height="7" rx="3.5"/>
+      <rect x="336" y="298" width="196" height="7" rx="3.5"/>
+      <rect x="336" y="314" width="120" height="7" rx="3.5"/>
+      <rect x="318" y="330" width="208" height="7" rx="3.5"/>
+    </g>
+    <text x="318" y="366" font-family="ui-monospace, monospace" font-size="14" fill="#FF5E00">acc 0.941  f1 0.928</text>
+    <rect x="318" y="380" width="12" height="14" fill="#FF5E00"/>
+  </g>
+
+  <!-- ===== sticky note { } (left) ===== -->
+  <g transform="rotate(-6 136 380)">
+    <rect x="62" y="312" width="150" height="140" fill="#fbf3d4" stroke="#dfd7a4" stroke-width="2"/>
+    <text x="84" y="392" font-family="ui-monospace, monospace" font-size="52" font-weight="700" fill="#FF5E00">{ }</text>
+    <g stroke="#d8cf9e" stroke-width="2" stroke-linecap="round">
+      <path d="M80 410h114"/><path d="M80 424h72"/>
+    </g>
+  </g>
+
+  <!-- ===== barcode strip ===== -->
+  <g fill="#3B4AD6" transform="translate(40 486)">
+    <rect x="0" y="0" width="3" height="42"/><rect x="7" y="0" width="6" height="42"/>
+    <rect x="17" y="0" width="2" height="42"/><rect x="23" y="0" width="5" height="42"/>
+    <rect x="32" y="0" width="3" height="42"/><rect x="39" y="0" width="2" height="42"/>
+    <rect x="45" y="0" width="7" height="42"/><rect x="56" y="0" width="3" height="42"/>
+    <rect x="63" y="0" width="2" height="42"/><rect x="69" y="0" width="6" height="42"/>
+    <rect x="79" y="0" width="3" height="42"/><rect x="86" y="0" width="4" height="42"/>
+    <rect x="94" y="0" width="2" height="42"/><rect x="100" y="0" width="6" height="42"/>
+    <rect x="110" y="0" width="3" height="42"/><rect x="117" y="0" width="2" height="42"/>
+    <rect x="123" y="0" width="5" height="42"/><rect x="132" y="0" width="3" height="42"/>
+  </g>
+  <text x="42" y="546" font-family="ui-monospace, monospace" font-size="12" letter-spacing="2" fill="#3B4AD6" opacity="0.7">BUILD 0417</text>
+
+  <!-- ===== network graph (bottom-left / center) ===== -->
+  <g stroke="#3B4AD6" stroke-width="2.2" stroke-linecap="round" opacity="0.55" fill="none">
+    <path d="M120 630 196 574"/><path d="M196 574 268 620"/><path d="M268 620 340 560"/>
+    <path d="M340 560 424 606"/><path d="M424 606 500 552"/><path d="M500 552 580 600"/>
+    <path d="M580 600 656 546"/><path d="M196 574 246 500"/><path d="M246 500 340 560"/>
+    <path d="M246 500 322 464"/><path d="M322 464 424 606"/><path d="M424 606 470 686"/>
+    <path d="M500 552 596 500"/><path d="M596 500 656 546"/><path d="M596 500 668 448"/>
+    <path d="M120 630 168 690"/><path d="M268 620 316 688"/><path d="M580 600 640 664"/>
+  </g>
+  <g stroke="#FF5E00" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M246 500 322 464"/><path d="M322 464 424 606"/><path d="M424 606 500 552"/><path d="M500 552 596 500"/>
+  </g>
+  <g>
+    <use href="#nd" x="120" y="630"/><use href="#nd" x="196" y="574"/><use href="#nd" x="268" y="620"/>
+    <use href="#nd" x="340" y="560"/><use href="#nd" x="580" y="600"/><use href="#nd" x="656" y="546"/>
+    <use href="#nd" x="168" y="690"/><use href="#nd" x="316" y="688"/><use href="#nd" x="640" y="664"/>
+    <use href="#nd" x="470" y="686"/><use href="#nd" x="668" y="448"/>
+    <use href="#ndo" x="246" y="500"/><use href="#ndo" x="322" y="464"/><use href="#ndo" x="424" y="606"/>
+    <use href="#ndo" x="500" y="552"/><use href="#ndo" x="596" y="500"/>
+  </g>
+  <text x="112" y="462" font-family="ui-monospace, monospace" font-size="13" fill="#3B4AD6" opacity="0.7">graph.walk(seed)</text>
+
+  <!-- ===== confusion matrix ===== -->
+  <g transform="translate(760 430)">
+    <g fill="#FF5E00">
+      <rect x="0" y="0" width="56" height="52"/><rect x="56" y="52" width="56" height="52"/><rect x="112" y="104" width="56" height="52"/>
+    </g>
+    <g fill="#FF5E00" opacity="0.28">
+      <rect x="56" y="0" width="56" height="52"/><rect x="0" y="52" width="56" height="52"/><rect x="112" y="52" width="56" height="52"/>
+    </g>
+    <g fill="#3B4AD6" opacity="0.2">
+      <rect x="112" y="0" width="56" height="52"/><rect x="0" y="104" width="56" height="52"/><rect x="56" y="104" width="56" height="52"/>
+    </g>
+    <g stroke="#3B4AD6" stroke-width="2.6" fill="none">
+      <rect x="0" y="0" width="168" height="156"/>
+      <path d="M56 0v156"/><path d="M112 0v156"/><path d="M0 52h168"/><path d="M0 104h168"/>
+    </g>
+    <text x="0" y="-12" font-family="ui-monospace, monospace" font-size="13" fill="#3B4AD6" opacity="0.8">confusion</text>
+  </g>
+
+  <!-- ===== graph card (right lower) ===== -->
+  <g>
+    <rect x="980" y="336" width="336" height="216" fill="#fbf3d4" stroke="#3B4AD6" stroke-width="3"/>
+    <g stroke="#3B4AD6" stroke-width="2.2" stroke-linecap="round" opacity="0.6" fill="none">
+      <path d="M1022 500 1076 424"/><path d="M1076 424 1148 470"/><path d="M1148 470 1210 396"/>
+      <path d="M1210 396 1272 456"/><path d="M1076 424 1140 372"/><path d="M1140 372 1210 396"/>
+      <path d="M1022 500 1104 512"/><path d="M1104 512 1148 470"/><path d="M1272 456 1276 512"/>
+    </g>
+    <g stroke="#FF5E00" stroke-width="4" stroke-linecap="round" fill="none">
+      <path d="M1076 424 1140 372"/><path d="M1140 372 1210 396"/><path d="M1210 396 1272 456"/>
+    </g>
+    <g>
+      <use href="#nd" x="1022" y="500"/><use href="#nd" x="1148" y="470"/>
+      <use href="#nd" x="1104" y="512"/><use href="#nd" x="1276" y="512"/>
+      <use href="#ndo" x="1076" y="424"/><use href="#ndo" x="1140" y="372"/>
+      <use href="#ndo" x="1210" y="396"/><use href="#ndo" x="1272" y="456"/>
+    </g>
+    <text x="998" y="366" font-family="ui-monospace, monospace" font-size="13" fill="#3B4AD6" opacity="0.75">nodes 8 · edges 9</text>
+  </g>
+
+  <!-- ===== small chip glyphs ===== -->
+  <g transform="translate(706 250)">
+    <g stroke="#FF5E00" stroke-width="4" stroke-linecap="round">
+      <path d="M22 6v-6"/><path d="M22 44v6"/><path d="M6 25H0"/><path d="M38 25h6"/>
+    </g>
+    <rect x="4" y="7" width="36" height="36" rx="10" fill="#FF5E00"/>
+    <rect x="14" y="17" width="16" height="16" rx="5" fill="#ffffff"/>
+  </g>
+  <g transform="translate(890 606)">
+    <g stroke="#3B4AD6" stroke-width="4" stroke-linecap="round">
+      <path d="M22 6v-6"/><path d="M22 44v6"/><path d="M6 25H0"/><path d="M38 25h6"/>
+    </g>
+    <rect x="4" y="7" width="36" height="36" rx="10" fill="#3B4AD6"/>
+    <rect x="14" y="17" width="16" height="16" rx="5" fill="#ffffff"/>
+  </g>
+
+  <!-- ===== scattered sparkles & dots ===== -->
+  <g>
+    <use href="#ast" x="452" y="34"/><use href="#ast" x="928" y="332"/>
+    <use href="#ast" x="742" y="692"/><use href="#ast" x="1340" y="322"/>
+    <use href="#ast" x="18" y="676"/><use href="#ast" x="700" y="424"/>
+  </g>
+  <g fill="#FF5E00">
+    <circle cx="936" cy="26" r="5"/><circle cx="712" cy="200" r="4"/><circle cx="34" cy="30" r="5"/>
+    <circle cx="1338" cy="628" r="5"/><circle cx="854" cy="380" r="4"/><circle cx="470" cy="230" r="4"/>
+  </g>
+  <g fill="#3B4AD6" opacity="0.6">
+    <circle cx="900" cy="240" r="3.5"/><circle cx="922" cy="262" r="3.5"/><circle cx="878" cy="268" r="3.5"/>
+    <circle cx="742" cy="470" r="3.5"/><circle cx="726" cy="500" r="3.5"/><circle cx="756" cy="522" r="3.5"/>
+    <circle cx="1332" cy="180" r="3.5"/><circle cx="1310" cy="206" r="3.5"/>
+  </g>
+
+  <!-- dotted texture blocks -->
+  <rect x="856" y="60" width="72" height="72" fill="url(#dots)"/>
+  <rect x="240" y="676" width="120" height="40" fill="url(#dots)" opacity="0.6"/>
+  <rect x="1224" y="560" width="110" height="52" fill="url(#dots)" opacity="0.7"/>
+
+  <!-- code snippet strips -->
+  <g transform="translate(700 596)">
+    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="14" fill="#3B4AD6" opacity="0.75">for n in graph:</text>
+    <text x="16" y="22" font-family="ui-monospace, monospace" font-size="14" fill="#FF5E00" opacity="0.9">visit(n)</text>
+  </g>
+  <g transform="translate(956 622)">
+    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="14" fill="#3B4AD6" opacity="0.7">// TODO: cache</text>
+    <text x="0" y="22" font-family="ui-monospace, monospace" font-size="14" fill="#3B4AD6" opacity="0.45">// ship it</text>
+  </g>
+  <g transform="translate(742 366) rotate(-4)">
+    <text x="0" y="0" font-family="Georgia, serif" font-size="20" font-style="italic" fill="#FF5E00" opacity="0.85">build · break · repeat</text>
+  </g>
+
+  <!-- left edge label -->
+  <text x="20" y="690" transform="rotate(-90 20 690)" font-family="ui-monospace, monospace" font-size="13" letter-spacing="3" fill="#3B4AD6" opacity="0.4">commit · rebase · ship</text>
+
+  <!-- bottom-left fragments -->
+  <g transform="translate(38 586)">
+    <rect x="0" y="0" width="70" height="44" fill="none" stroke="#3B4AD6" stroke-width="2" stroke-dasharray="6 5" opacity="0.5"/>
+    <g fill="#FF5E00" opacity="0.7">
+      <rect x="10" y="12" width="34" height="6" rx="3"/>
+      <rect x="10" y="26" width="20" height="6" rx="3"/>
+    </g>
+  </g>
+  <text x="34" y="666" font-family="ui-monospace, monospace" font-size="13" fill="#3B4AD6" opacity="0.55">n = 17</text>
+
+  <!-- bottom ruler -->
+  <g stroke="#3B4AD6" stroke-width="2" stroke-linecap="round" opacity="0.4">
+    <path d="M0 714h1360"/>
+    <path d="M40 714v-10"/><path d="M90 714v-6"/><path d="M140 714v-6"/><path d="M190 714v-6"/>
+    <path d="M240 714v-10"/><path d="M290 714v-6"/><path d="M340 714v-6"/><path d="M390 714v-6"/>
+    <path d="M440 714v-10"/><path d="M490 714v-6"/><path d="M540 714v-6"/><path d="M590 714v-6"/>
+    <path d="M640 714v-10"/><path d="M690 714v-6"/><path d="M740 714v-6"/><path d="M790 714v-6"/>
+    <path d="M840 714v-10"/><path d="M890 714v-6"/><path d="M940 714v-6"/><path d="M990 714v-6"/>
+    <path d="M1040 714v-10"/><path d="M1090 714v-6"/><path d="M1140 714v-6"/><path d="M1190 714v-6"/>
+    <path d="M1240 714v-10"/><path d="M1290 714v-6"/><path d="M1340 714v-6"/>
+  </g>
+
+  <!-- top edge tape marks -->
+  <g fill="#FF5E00" opacity="0.5">
+    <rect x="596" y="0" width="86" height="16" transform="rotate(-4 639 8)"/>
+    <rect x="1180" y="704" width="96" height="16" transform="rotate(3 1228 712)"/>
+  </g>
+</svg>

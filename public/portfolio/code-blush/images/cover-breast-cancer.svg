@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="673" height="594" viewBox="0 0 673 594" fill="none">
+  <title>Breast Cancer ML - confusion matrix and model comparison</title>
+  <rect width="673" height="594" rx="18" fill="#3B4AD6"/>
+
+  <g>
+    <text x="44" y="66" font-family="Georgia, serif" font-size="28" fill="#ffffff">Confusion matrix</text>
+    <text x="44" y="90" font-family="system-ui, sans-serif" font-size="11" letter-spacing="1.8" fill="#fbf3d4">SVM WINS &#183; 97.4% ON THE HELD-OUT SPLIT</text>
+  </g>
+
+  <!-- 2x2 matrix, cells shaded by count -->
+  <g transform="rotate(-0.7 276 312)">
+    <text x="276" y="136" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" letter-spacing="2.2" fill="#ffffff" fill-opacity=".55">PREDICTED</text>
+    <text x="206" y="161" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" letter-spacing="1.3" fill="#fbf3d4">BENIGN</text>
+    <text x="346" y="161" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" letter-spacing="1.3" fill="#fbf3d4">MALIGNANT</text>
+    <text transform="translate(100 312) rotate(-90)" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" letter-spacing="2.2" fill="#ffffff" fill-opacity=".55">ACTUAL</text>
+    <text transform="translate(126 242) rotate(-90)" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" letter-spacing="1.3" fill="#fbf3d4">BENIGN</text>
+    <text transform="translate(126 382) rotate(-90)" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" letter-spacing="1.3" fill="#fbf3d4">MALIGNANT</text>
+
+    <rect x="140" y="176" width="132" height="132" rx="9" fill="#ffffff" fill-opacity=".94"/>
+    <rect x="280" y="176" width="132" height="132" rx="9" fill="#ffffff" fill-opacity=".15"/>
+    <rect x="140" y="316" width="132" height="132" rx="9" fill="#ffffff" fill-opacity=".11"/>
+    <rect x="280" y="316" width="132" height="132" rx="9" fill="#ffffff" fill-opacity=".62"/>
+
+    <g font-family="Georgia, serif" font-size="40" text-anchor="middle">
+      <text x="206" y="255" fill="#3B4AD6">71</text>
+      <text x="346" y="255" fill="#ffffff">2</text>
+      <text x="206" y="395" fill="#ffffff">1</text>
+      <text x="346" y="395" fill="#3B4AD6">40</text>
+    </g>
+    <g font-family="system-ui, sans-serif" font-size="10" letter-spacing="1.4">
+      <text x="154" y="196" fill="#3B4AD6" fill-opacity=".65">TN</text>
+      <text x="294" y="196" fill="#ffffff" fill-opacity=".7">FP</text>
+      <text x="154" y="336" fill="#ffffff" fill-opacity=".7">FN</text>
+      <text x="294" y="336" fill="#3B4AD6" fill-opacity=".65">TP</text>
+    </g>
+    <g font-family="system-ui, sans-serif" font-size="10.5">
+      <text x="286" y="286" fill="#ffffff" fill-opacity=".75">false alarm</text>
+      <text x="146" y="426" fill="#FF5E00">1 missed</text>
+    </g>
+    <path d="M172 434 Q186 441 202 435" stroke="#FF5E00" stroke-width="2" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- accuracy of the five classifiers -->
+  <g transform="rotate(0.6 540 300)">
+    <text x="456" y="136" font-family="system-ui, sans-serif" font-size="10" letter-spacing="2.2" fill="#ffffff" fill-opacity=".55">ACCURACY &#183; 5 MODELS</text>
+
+    <path d="M450 314.7 H632" stroke="#ffffff" stroke-opacity=".22" stroke-width="1.2" stroke-dasharray="3 4"/>
+    <text x="636" y="318" font-family="system-ui, sans-serif" font-size="8.5" fill="#ffffff" fill-opacity=".45">95</text>
+    <path d="M450 448.5 Q540 446.5 632 448.5" stroke="#ffffff" stroke-opacity=".4" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+
+    <g fill="#ffffff" fill-opacity=".52">
+      <rect x="456" y="307" width="24" height="141" rx="5"/>
+      <rect x="492" y="319" width="24" height="129" rx="5"/>
+      <rect x="528" y="353" width="24" height="95" rx="5"/>
+      <rect x="564" y="295" width="24" height="153" rx="5"/>
+    </g>
+    <rect x="600" y="283" width="24" height="165" rx="5" fill="#FF5E00"/>
+
+    <g font-family="system-ui, sans-serif" font-size="9.5" text-anchor="middle" fill="#ffffff" fill-opacity=".8">
+      <text x="468" y="468">LR</text>
+      <text x="504" y="468">KNN</text>
+      <text x="540" y="468">DT</text>
+      <text x="576" y="468">RF</text>
+      <text x="612" y="468" fill="#FF5E00" fill-opacity="1">SVM</text>
+    </g>
+    <path d="M599 477 Q612 483 625 476" stroke="#FF5E00" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <text x="612" y="272" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#FF5E00">97%</text>
+  </g>
+
+  <text x="44" y="530" font-family="system-ui, sans-serif" font-size="11" letter-spacing="1.5" fill="#ffffff" fill-opacity=".7">WISCONSIN DIAGNOSTIC &#183; 569 SAMPLES &#183; 30 FEATURES &#183; SMOTE-BALANCED</text>
+</svg>
