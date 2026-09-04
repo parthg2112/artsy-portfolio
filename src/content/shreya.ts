@@ -207,4 +207,28 @@ export const content: PortfolioContent = {
       ],
     },
   ],
+
+  /**
+   * The corner player's queue. Metadata only: these recordings are licensed, so no audio
+   * and no cover art is committed. Drop files matching these `url`s into public/audio/
+   * and the player surfaces on its own; without them it never renders at all.
+   */
+  tracks: [
+    {
+      id: "sunflower",
+      title: "Sunflower",
+      artist: "Post Malone & Swae Lee",
+      album: "Spider-Man: Into the Spider-Verse",
+      duration: 158,
+      url: "/audio/sunflower.mp3",
+    },
+    {
+      id: "lemonade",
+      title: "Lemonade",
+      artist: "Internet Money & Gunna",
+      album: "B4 The Storm",
+      duration: 196,
+      url: "/audio/lemonade.mp3",
+    },
+  ],
 };

@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Gluten, Instrument_Sans, Instrument_Serif, Manjari } from "next/font/google";
 
 import { ClickSpark } from "@/components/portfolio/shared/ClickSpark";
+import { MusicPlayer } from "@/components/portfolio/shared/MusicPlayer";
 import { paletteBootScript } from "@/components/portfolio/shared/usePalette";
+import { content } from "@/content/shreya";
 
 import "./globals.css";
 
@@ -53,6 +55,9 @@ export default function RootLayout({
         {/* Viewport-fixed and pointer-events-none, so it draws over every route without
             intercepting a single click. */}
         <ClickSpark />
+        {/* Lives in the layout, not a page: the audio element must survive client-side
+            navigation or the track would restart on every route change. */}
+        <MusicPlayer tracks={content.tracks} />
       </body>
     </html>
   );

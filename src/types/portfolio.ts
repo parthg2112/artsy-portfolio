@@ -84,6 +84,27 @@ export interface PortfolioContent {
   };
   cta: { headline: string; buttonLabel: string };
   footerColumns: FooterColumn[];
+  /** Queue for the corner player. An empty array disables it entirely. */
+  tracks: Track[];
+}
+
+/**
+ * One entry in the corner player's queue.
+ *
+ * `artwork` is optional on purpose: real cover art is licensed material, so the player
+ * draws a palette tile from the track's own id when none is given. Only set it to a file
+ * there is a right to publish.
+ */
+export interface Track {
+  id: string;
+  title: string;
+  artist: string;
+  album?: string;
+  artwork?: string;
+  /** Seconds. Seeds the scrubber until the file's own metadata replaces it. */
+  duration: number;
+  /** Audio file. Without one the track is metadata only and the player stays hidden. */
+  url?: string;
 }
 
 /* -------------------------------- asset packs ------------------------------- */

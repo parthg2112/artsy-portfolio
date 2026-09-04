@@ -286,6 +286,47 @@
   will-change: opacity, transform;
 }
 
+/* Range inputs in the corner player. Native controls carry the OS accent, which is the
+   one colour on the page that ignores the palette, so both tracks and thumbs are drawn
+   here instead. */
+.additti-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 14px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.additti-range::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--additti-ink) 18%, transparent);
+}
+
+.additti-range::-moz-range-track {
+  height: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--additti-ink) 18%, transparent);
+}
+
+.additti-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 11px;
+  height: 11px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: var(--additti-ink);
+}
+
+.additti-range::-moz-range-thumb {
+  width: 11px;
+  height: 11px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--additti-ink);
+}
+
 /* Letters as a window onto the section's own photograph. The cream `color` is the base,
    so a browser without background-clip still renders a readable heading; only inside the
    @supports guard do the glyphs become transparent and let the image through. */

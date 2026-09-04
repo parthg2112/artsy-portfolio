@@ -58,6 +58,35 @@ and **Tally's own loader in the parent page** is what resizes it. `TallyEmbed` l
 `https://tally.so/widgets/embed.js` for exactly that reason. A hand-rolled `postMessage`
 listener does not work - that was tried and never fired.
 
+### The corner player - `src/components/portfolio/shared/MusicPlayer.tsx`
+
+Bottom-left, three stages: `hidden -> hint -> player`. The hint reads "click anywhere for
+sound"; the first click on the document is both the cue and the user gesture browsers
+require before audio may play, so autoplay is never attempted. A `✕` opts out and is
+remembered in `sessionStorage`.
+
+**No audio or cover art is in this repo, and none should be.** The queue in
+`content.tracks` is metadata only; `public/audio/` is gitignored. Drop
+`sunflower.mp3` and `lemonade.mp3` in there and the player appears by itself. Without
+them it renders nothing at all - it waits for the audio element to report
+`readyState >= 1` before it will even show the hint, so a fresh clone never displays a
+player that could not play anything. Cover art is the same story: `Track.artwork` is
+optional and a palette tile is drawn from the track id unless a file is supplied.
+
+Three traps live in it, all found by testing rather than reading:
+
+- `onLoadedMetadata` **cannot be the only readiness signal.** A local file often reaches
+  `HAVE_METADATA` before React attaches the handler, so the event fires into nothing.
+  The element's `readyState` is checked on mount as well, per track.
+- The document listener is in the **capture** phase, so `stopPropagation` inside the
+  dismiss button runs too late to stop it - "no thanks" would start the music. The opt-out
+  is checked inside the capture handler via `[data-player-optout]`.
+- Space and the arrow keys are bound to the **player**, never the document. A global
+  Space handler would take the spacebar away from page scrolling across the whole site.
+
+The player is mounted in `layout.tsx`, not in a page, so the audio element survives
+client-side navigation instead of restarting the track on every route change.
+
 ### Artwork - `src/assets/packs/{code,original}.ts`
 Both satisfy `AssetPack` in `src/types/portfolio.ts`. Each slot carries its `src` **and**
 its geometry, because the layout numbers are derived per image. To swap a picture, change
