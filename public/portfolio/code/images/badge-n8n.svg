@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="286" height="400" viewBox="0 0 286 400" fill="none">
+  <g transform="rotate(-3 143 200)" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="26" y="52" width="234" height="296" rx="30" fill="#FF5E00"/>
+    <g stroke="#F7F2E6" stroke-width="5" fill="none">
+      <path d="M100 152c22 0 16 50 40 50"/>
+      <path d="M166 202c24 0 18-50 40-50"/>
+    </g>
+    <g fill="#F7F2E6">
+      <rect x="58" y="132" width="42" height="42" rx="13"/>
+      <rect x="122" y="182" width="42" height="42" rx="13"/>
+      <rect x="186" y="132" width="42" height="42" rx="13"/>
+    </g>
+    <g fill="#FF5E00">
+      <circle cx="79" cy="153" r="7"/>
+      <circle cx="143" cy="203" r="7"/>
+      <circle cx="207" cy="153" r="7"/>
+    </g>
+    <text x="143" y="300" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-size="62" fill="#F7F2E6">n8n</text>
+    <text x="143" y="324" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="14" letter-spacing="5" fill="#EBECB0">WORKFLOWS</text>
+  </g>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="286" height="400" viewBox="0 0 286 400" fill="none">
+  <g transform="rotate(3.5 143 200)" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="30" y="62" width="226" height="226" rx="46" fill="#3B4AD6"/>
+    <text x="143" y="215" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-size="112" fill="#F7F2E6">TS</text>
+    <path d="M76 244h134" stroke="#EBECB0" stroke-width="5"/>
+    <circle cx="228" cy="92" r="9" fill="#EBECB0"/>
+    <text x="143" y="336" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-size="34" fill="#3B4AD6">TypeScript</text>
+    <path d="M104 352h78" stroke="#FF5E00" stroke-width="5"/>
+  </g>
+</svg>

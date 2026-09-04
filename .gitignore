@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build
+.next/
+out/
+build/
+dist/
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Vercel
+.vercel
+
+# Local settings (not project config)
+.claude/settings.local.json
+
+# Local temp files
+temp/
+
+# Reference artwork from artofadditti.com. Not ours, must never ship or enter the
+# history. The /original route renders broken images without it - see README.
+public/portfolio/original/images/
+
+# Regenerated from the running site by scripts/shoot-references.mjs, so there is no
+# reason to carry ~14 MB of PNGs per pass in the history.
+docs/design-references/

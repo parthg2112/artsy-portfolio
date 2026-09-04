@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="286" height="400" viewBox="0 0 286 400" fill="none">
+  <g transform="rotate(2.5 143 200)" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="26" y="52" width="234" height="296" rx="30" fill="#3B4AD6"/>
+    <g fill="none" stroke="#F7F2E6" stroke-width="5">
+      <path d="M83 132v100a60 21 0 0 0 120 0V132"/>
+      <path d="M83 166a60 21 0 0 0 120 0"/>
+      <path d="M83 199a60 21 0 0 0 120 0"/>
+    </g>
+    <ellipse cx="143" cy="132" rx="60" ry="21" fill="#EBECB0" stroke="#F7F2E6" stroke-width="5"/>
+    <circle cx="143" cy="132" r="7" fill="#FF5E00"/>
+    <text x="143" y="316" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-size="36" fill="#F7F2E6">Postgres</text>
+    <path d="M112 332h62" stroke="#EBECB0" stroke-width="5"/>
+  </g>
+</svg>

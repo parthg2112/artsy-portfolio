@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="286" height="400" viewBox="0 0 286 400" fill="none">
+  <g transform="rotate(-4 143 200)" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="26" y="52" width="234" height="296" rx="30" fill="#F7F2E6" stroke="#FF5E00" stroke-width="6"/>
+    <rect x="39" y="65" width="208" height="270" rx="21" stroke="#FF5E00" stroke-width="2"/>
+    <g stroke="#FF5E00" stroke-width="6">
+      <path d="M60 114h16M68 106v16"/>
+      <path d="M210 114h16M218 106v16"/>
+    </g>
+    <text x="143" y="232" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-size="96" fill="#FF5E00">C++</text>
+    <path d="M92 258h102" stroke="#FF5E00" stroke-width="5"/>
+    <text x="143" y="302" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="17" letter-spacing="5" fill="#FF5E00">C PLUS PLUS</text>
+  </g>
+</svg>
