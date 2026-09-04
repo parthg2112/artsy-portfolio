@@ -51,3 +51,6 @@ public/portfolio/original/images/
 # Regenerated from the running site by scripts/shoot-references.mjs, so there is no
 # reason to carry ~14 MB of PNGs per pass in the history.
 docs/design-references/
+
+.vercel
+.env*

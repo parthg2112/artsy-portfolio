@@ -1,0 +1,8 @@
+# The CLI uploads the working directory and does NOT fall back to .gitignore here, so
+# these must be listed explicitly. public/portfolio/original is Aditi Kulkarni's artwork
+# and must never leave this machine; the rest is just build noise and local references.
+public/portfolio/original
+docs
+.next
+node_modules
+tsconfig.tsbuildinfo
