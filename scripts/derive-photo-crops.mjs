@@ -66,11 +66,17 @@ const JOBS = [
   {
     // Behind the /about art card: the butterflies pixel-dissolve to this on hover.
     // Same 317x398 box as the card, at 2x.
-    src: "shreya-portrait.jpg",
+    //
+    // Was shreya-portrait.jpg, which is also the centre of the lens collage directly
+    // below - the same face twice in one eyeline. The cat-cafe shot only ever appeared
+    // as a 140x76 letterbox chip, so this is the one place it gets seen whole. Stored
+    // with EXIF orientation 6; the pipeline rotates first, so this box is in the upright
+    // 4284x5712 frame and is very nearly the full plate.
+    src: "shreya-cat-cafe.jpg",
     out: "art-about-reveal.jpg",
     w: 634,
     h: 796,
-    position: "top",
+    extract: { left: 0, top: 166, width: 4284, height: 5379 },
   },
   // Three heading chips, rendered 140x76 at scale(1.3).
   { src: "shreya-childhood.jpg", out: "chip-photo-a.jpg", w: 420, h: 228, position: "attention" },

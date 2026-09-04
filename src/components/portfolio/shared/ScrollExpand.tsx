@@ -28,7 +28,8 @@ const smoothstep = (edge0: number, edge1: number, x: number) => {
 interface ScrollExpandProps {
   src: string;
   alt?: string;
-  title?: string;
+  /** Node, not string, so the title can carry its own treatment (see MaskedHeading). */
+  title?: React.ReactNode;
   scrollHint?: string;
   startWidth?: number;
   startHeight?: number;
@@ -102,9 +103,11 @@ export function ScrollExpand({
 
       media.style.transform = `scale(${mediaZoom + (1 - mediaZoom) * e})`;
 
-      // The scrim never goes fully clear: the display type sits on skin tones at rest and
-      // needs something behind it to read against.
-      if (scrimRef.current) scrimRef.current.style.opacity = `${overlayScrim * (0.55 + 0.45 * e)}`;
+      // The scrim never goes fully clear: the display type sits on the picture at rest and
+      // needs something behind it to read against. The floor was 0.55; the title is now
+      // filled with this same photograph, so the backdrop has to be pushed further from
+      // the letters or the two read as one flat wash.
+      if (scrimRef.current) scrimRef.current.style.opacity = `${overlayScrim * (0.78 + 0.22 * e)}`;
 
       if (titleRef.current) {
         const out = smoothstep(0.4, 0.88, p);

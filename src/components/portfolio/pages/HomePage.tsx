@@ -8,6 +8,7 @@ import { ServicesSection } from "@/components/portfolio/home/ServicesSection";
 import { StickerMarquee } from "@/components/portfolio/home/StickerMarquee";
 import { WorkSection } from "@/components/portfolio/home/WorkSection";
 import { CtaFooter } from "@/components/portfolio/shared/CtaFooter";
+import { MaskedHeading } from "@/components/portfolio/shared/MaskedHeading";
 import { PackSwitcher } from "@/components/portfolio/shared/PackSwitcher";
 import { ScrollExpand } from "@/components/portfolio/shared/ScrollExpand";
 import { BracketCursor } from "@/components/portfolio/shared/BracketCursor";
@@ -34,7 +35,10 @@ export function HomePage({ packId }: { packId: PackId }) {
         <ScrollExpand
           src={pack.fullBleed.src}
           alt=""
-          title={content.fullBleed.title}
+          // The title is filled with the same photograph the frame is showing. It reads
+          // because the frame behind it carries the blue scrim and the letters do not:
+          // they are the one clear window onto the picture.
+          title={<MaskedHeading text={content.fullBleed.title} src={pack.fullBleed.src} />}
           scrollHint={content.fullBleed.hint}
         >
           <p className="max-w-[24ch] font-[family-name:var(--font-display)] text-[28px] leading-[1.15] min-[810px]:text-[44px]">

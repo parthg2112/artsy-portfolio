@@ -40,7 +40,7 @@ function ArtCard({ pack }: { pack: AssetPack }) {
       <PixelReveal
         frontSrc={pack.aboutHero.dossierCover}
         backSrc={pack.aboutHero.artReveal}
-        alt={`Artwork, dissolving to a portrait of ${content.name}`}
+        alt={`Artwork, dissolving to a photo of ${content.name} with a cat in her lap`}
         className="absolute left-[calc(50%-158.5px)] top-[calc(50%-198.5px)] h-[397px] w-[317px] rounded-[20px] border-[3px] border-ink shadow-[0_18px_44px_-18px_color-mix(in_srgb,var(--additti-blue)_60%,transparent)]"
       />
     </div>

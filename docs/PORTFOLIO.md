@@ -108,7 +108,7 @@ pipeline calls `.rotate()` first and every `extract` box below is in the upright
 | Folder sheet | 187x132 | `cat.jpg` |
 | Heading chips x3 | 140x76 | `shreya-childhood`, `shreya-visor`, `shreya-cat-cafe` |
 | Full-bleed scroll section | 1440x900 | `shreya-standing.jpg` (horizontal band) |
-| /about art card reveal | 317x398 | `shreya-portrait.jpg` |
+| /about art card reveal | 317x398 | `shreya-cat-cafe.jpg` (near-full plate) |
 | Lens collage | 1360x720 | `shreya-portrait` centre, the rest as scrapbook polaroids |
 
 Two of these need an explicit `extract` box rather than `cover` or `sharp.strategy.attention`:
@@ -159,6 +159,14 @@ plus the seam gap, only one stack is left on screen, so any viewport wider than 
 (1126px on desktop, i.e. every desktop) runs out of track and the band ends mid-air. The
 copy count is derived from the measured band width; the invariant to hold is
 `trackWidth - distance >= bandWidth`.
+
+`MaskedHeading` fills the scroll-expand title with the section's own photograph. Two
+traps live in it. The wipe's `clip-path` must stay on an inner element, because a
+clip-path on the element an IntersectionObserver is watching counts against that
+element's own intersection ratio - put both on one node and the reveal deadlocks at
+zero and the heading never appears. And the fill is `background-clip: text` with a
+cream `color` underneath, so a browser without it still shows a readable heading;
+never remove that base colour.
 
 Two more things must not be re-clipped: the CTA pill's hover ring scales past its own box
 and the column starts flush at the container's left edge, so the wrapper inside the footer

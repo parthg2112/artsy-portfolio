@@ -286,6 +286,30 @@
   will-change: opacity, transform;
 }
 
+/* Letters as a window onto the section's own photograph. The cream `color` is the base,
+   so a browser without background-clip still renders a readable heading; only inside the
+   @supports guard do the glyphs become transparent and let the image through. */
+/* Deliberately unclipped: this is the box the in-view observer measures, and a clip-path
+   here would zero its own intersection ratio and stop the reveal from ever running. */
+.masked-heading-root {
+  display: inline-block;
+}
+
+.masked-heading {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: var(--additti-paper);
+  will-change: clip-path, background-position;
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .masked-heading {
+    -webkit-text-fill-color: transparent;
+  }
+}
+
 .scroll-expand__hint {
   position: absolute;
   left: 0;
