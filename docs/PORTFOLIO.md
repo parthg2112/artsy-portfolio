@@ -9,10 +9,15 @@ side by side.
 | `/` `/about` `/contact` | **code pack** - hand-authored SVG + Shreya's photos |
 | `/original` `/original/about` `/original/contact` | **original pack** - artofadditti's artwork, kept as a private design reference |
 
-A switcher pinned to the bottom-centre flips between them and keeps you on the same page.
+A switcher pinned to the bottom-centre flips between them in development. It is not
+rendered in production - see Deploying at the end.
 
 > The original pack is reference only. That artwork is Aditi Kulkarni's and must not ship
-> on the public site - see `docs/research/www-artofadditti-com-69cfdfac/ARTIFACT_MANIFEST.md`.
+> on the public site, so `public/portfolio/original/images/` is gitignored. A fresh clone
+> renders `/original` with broken images; that is expected.
+
+There is a second axis: **palette**. `Blush` is what ships - pink and butter grounds with
+the two inks unchanged. `Paper` is the inherited cream and lime, kept as an override.
 
 ## Where to change things
 
@@ -22,9 +27,36 @@ the three services, About copy, CTA, footer columns, and the Tally embed URL. Bo
 read from it, so a copy edit shows up in both variants at once.
 
 **The contact form** is Tally form `XxbZBP`, embedded with `transparentBackground=1` so
-the paper grid shows through it. `TallyEmbed` opens at 480px and grows if Tally posts a
-height back; the form itself measures 440px at every width. Clearing
-`contact.tallyEmbedUrl` falls back to a plain email block, so the page is never broken.
+the paper grid shows through it. Clearing `contact.tallyEmbedUrl` falls back to a plain
+email block, so the page is never broken.
+
+### Styling the Tally form
+
+**No CSS in this repo can reach the form.** It is a cross-origin iframe, so its fonts,
+colours, spacing and borders are all set inside Tally, under **Customize**. Free plan
+covers theme, colours and 900+ Google Fonts, which happens to include both fonts this
+site uses. Set these to match:
+
+| Tally control | value |
+|---|---|
+| Heading font | Instrument Serif |
+| Body font | Manjari |
+| Background | transparent |
+| Text | `#3B4AD6` |
+| Accent (links, focus, selected) | `#FF5E00` |
+| Button background | `#FF5E00` |
+| Button text | `#F7F2E6` |
+
+That matches fonts and colour exactly. Input border-radius, padding, border width and
+base font size are **Pro-only** ($29/mo, which also unlocks a custom CSS block), so those
+stay at Tally's defaults. The only way to a pixel-exact match without Pro is to drop the
+iframe and rebuild the form in these components, which then needs its own submission
+backend.
+
+`dynamicHeight=1` in the embed URL does nothing by itself: the iframe posts its height
+and **Tally's own loader in the parent page** is what resizes it. `TallyEmbed` loads
+`https://tally.so/widgets/embed.js` for exactly that reason. A hand-rolled `postMessage`
+listener does not work - that was tried and never fired.
 
 ### Artwork - `src/assets/packs/{code,original}.ts`
 Both satisfy `AssetPack` in `src/types/portfolio.ts`. Each slot carries its `src` **and**
@@ -32,22 +64,69 @@ its geometry, because the layout numbers are derived per image. To swap a pictur
 the path - and if the new file has a different aspect ratio, change the `width`/`height`
 next to it. Files live in `public/portfolio/{code,original}/images/`.
 
+### Colour - `src/app/globals.css`
+Four variables in `:root` are the whole palette. Nothing in `src/` hardcodes a brand hex;
+components use the `bg-paper` / `text-ink` / `text-blue` / `bg-lime` utilities that
+`@theme inline` generates from them.
+
+| role | Paper | Blush |
+|---|---|---|
+| page ground | `#f7f2e6` | `#fbeef0` |
+| band, footer | `#ebecb0` | `#fbf3d4` |
+| display type | `#ff5e00` | unchanged |
+| body, line art | `#3b4ad6` | unchanged |
+
+The inks deliberately do not move: pink, butter and white are all ~95% lightness, so if
+the ink went pale too there would be nothing left to read the 106px display type against.
+
+SVGs loaded through `<img src>` cannot see CSS variables, so the blush artwork is a
+generated second copy: `node scripts/recolour-palette.mjs` rebuilds
+`public/portfolio/code-blush/` from `public/portfolio/code/`. **Re-run it after touching
+any code-pack SVG.** It shifts each tint and shade by its own OKLab offset from its base
+rather than substituting colours, so highlights stay highlights.
+
+The paper grid is drawn with two `repeating-linear-gradient`s, not loaded from a file, so
+there is no asset to go missing and the line colour follows the palette.
+
 ### Photos
 Sources live in `public/portfolio/photos/`. The fixed-size crops the design needs are
 derived from them by `scripts/derive-photo-crops.mjs` (needs `sharp`); re-run it after
-adding or swapping a source.
+adding or swapping a source. `scripts/build-hero-props.mjs` builds the two hanging photo
+ornaments, which embed their photo as a data URI because an SVG loaded through `<img>`
+cannot reference an external image.
 
 | slot | rendered | source |
 |---|---|---|
 | Footer CTA portrait | 500x560 | `shreya-portrait-navy.jpg` |
 | About portrait | 240x260 | `shreya-selfie.jpg` (face region extracted) |
+| /about taped polaroid | 210x210 | `shreya-visor.jpg` (explicit square extract) |
+| Hero ornament photos x2 | 62 / 58 | `shreya-standing.jpg`, `shreya-childhood.jpg` |
+
+Some sources carry EXIF orientation (the cat-cafe shot is orientation 6), so the crop
+pipeline calls `.rotate()` first and every `extract` box below is in the upright frame.
 | Folder tab avatar | 30x30 | `shreya-closeup.jpg` |
 | Folder sheet | 187x132 | `cat.jpg` |
-| Heading chips x3 | 140x76 | `shreya-childhood`, `shreya-visor`, `shreya-standing` |
+| Heading chips x3 | 140x76 | `shreya-childhood`, `shreya-visor`, `shreya-cat-cafe` |
+| Full-bleed scroll section | 1440x900 | `shreya-standing.jpg` (horizontal band) |
+| /about art card reveal | 317x398 | `shreya-portrait.jpg` |
 | Lens collage | 1360x720 | `shreya-portrait` centre, the rest as scrapbook polaroids |
 
-The About portrait is scaled 1.4x and clipped by its wrapper, so `cover` alone leaves the
-face off-centre. That one uses an explicit `extract` box; if you swap the photo, re-pick it.
+Two of these need an explicit `extract` box rather than `cover` or `sharp.strategy.attention`:
+the About portrait (scaled 1.4x and clipped, so `cover` leaves the face off-centre) and
+the /about polaroid (`attention` locks onto the stair railing). If you swap either photo,
+re-pick the box.
+
+### Drawing an ornament that does not look machine-made
+The reference artwork carries its form in **tone**, not contour. The first version of this
+pack drew flat two-tone glyphs at one uniform stroke width and it read as clip-art. What
+fixed it:
+
+- no ink outline on the plane at all - the facets alone describe the shape
+- gradients rather than flat fills, and two or three stroke weights per object, with
+  details lighter than silhouettes
+- objects with weight (a bulb, a sprig, a cassette) rather than punctuation marks
+- real photographs for two of the five, which is texture no vector can fake
+- **space**: five objects with disjoint x-ranges beat six that overlap
 
 ### Adding a third pack (e.g. hand-crafted art)
 Copy `code.ts`, point it at new files, register it in `src/assets/packs/index.ts`, and add
@@ -75,18 +154,64 @@ hero's clip; `max-[809px]:top-[-24px]` compensates. If you change
 The marquee's card size lives only in the `DESKTOP`/`MOBILE` constants because `distance`
 is computed from them. Duplicating a size as a class literal desyncs the loop seam.
 
+It also needs **more than two copies** of the badge stack. After translating by one stack
+plus the seam gap, only one stack is left on screen, so any viewport wider than a stack
+(1126px on desktop, i.e. every desktop) runs out of track and the band ends mid-air. The
+copy count is derived from the measured band width; the invariant to hold is
+`trackWidth - distance >= bandWidth`.
+
+Two more things must not be re-clipped: the CTA pill's hover ring scales past its own box
+and the column starts flush at the container's left edge, so the wrapper inside the footer
+is deliberately **not** `overflow-clip`. And `layout.tsx` must not render a manual
+`<head>` - doing so suppresses Next's metadata injection and silently drops the
+`<link rel="icon">` for `app/icon.svg`. The palette boot script is the first child of
+`<body>` instead, which still runs before anything paints.
+
 Other length-sensitive spots: the folder tab label (`content.shortName`, ~209px of room),
 service titles (must not wrap - the title row is `overflow-clip`), and project titles
 (one line only; a second line breaks the card-height invariant the Work grid relies on).
 
-To re-measure, run the harness in `$CLAUDE_JOB_DIR/tmp`:
-`node probe2.mjs "http://localhost:3001/" measure-words.mjs "" 1440 900 1`
+The hero's decorative layer is **not** in that list. It is `absolute inset-0
+pointer-events-none`, so ornament positions and sizes can change freely without moving a
+measured landmark - verified by re-running the parity gate after rebuilding it.
+
+The /about polaroid renders twice, once per breakpoint, with the other hidden. That is the
+same idiom `AboutHero` uses for its lens frames. The mobile copy sits inside the heading,
+which is why it is a `<span>` and not a `<div>`.
 
 ## Verified
 
 - `npm run check` green; all 7 routes prerender static.
+- **Fresh clone builds and runs with no broken assets.** `git clone` to a temp dir,
+  `npm i`, `npm run build`: 6.3 MB, zero failed requests on `/`, `/about`, `/contact`.
+  This is the check that catches anything still reaching into the gitignored artwork.
 - `/` and `/original` measure **identical** - every landmark `dx,dy = 0,0`, same
   `docHeight` - so the pack layer changes artwork only, never layout.
-- No horizontal scroll, no broken images, no heading word overflowing its box, at
-  1440px and 402px. On mobile the hero heading keeps all 4 rows inside the section
-  (bottom 450 vs 506).
+- Switching palette changes only colours: same pack geometry, because the blush pack is
+  the paper pack with its image paths retargeted (`src/assets/packs/retarget.ts` rewrites
+  strings only, never numbers).
+- Hero ornaments: 5, no overlapping x-ranges, an even 29px between each.
+- No horizontal scroll, no heading word overflowing its box, at 1440px and 402px. On
+  mobile the hero heading keeps all 4 rows inside the section (bottom 450 vs 506).
+
+Note: an audit that flags `cover-email-digest.svg` and `cover-n8n.svg` as broken is seeing
+`next/image` lazy-loading, not a fault - they load once the page is scrolled. Scroll the
+page in the checker before asserting on image state.
+
+## Deploying
+
+The shipped design is **blush + code**. There is no switcher in production: the palette
+lives on bare `:root` so it applies with no JavaScript, and `PackSwitcher` only renders
+when `NODE_ENV === "development"`.
+
+`/original` is **development only**. Its artwork is gitignored, so each of those routes
+calls `notFound()` in production and returns a real 404 rather than a page of broken
+images. Locally all six routes still work, which is what keeps the parity gate runnable.
+
+To deploy on Vercel:
+
+1. `vercel.com/new` and import `parthg2112/shreyas-portfolio`.
+2. Next.js is auto-detected; no build settings to change.
+3. Project Settings -> Domains -> add `shreya.codes`.
+
+Nothing else is needed - there are no environment variables and no server routes.
