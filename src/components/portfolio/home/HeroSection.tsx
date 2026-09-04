@@ -2,9 +2,11 @@
 
 /* eslint-disable @next/next/no-img-element -- fixed-size Framer assets, no Next optimization wanted */
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 
+import { sparkAt } from "@/components/portfolio/shared/ClickSpark";
+import { cn } from "@/lib/utils";
 import type { AssetPack } from "@/types/portfolio";
 
 import { HeroFolder } from "./HeroFolder";
@@ -43,9 +45,23 @@ function restingStyle(frames: PlaneKeyframes) {
   };
 }
 
+/** How much each string lengthens at the top of its cycle, in px. */
+const BOB = [9, 6, 12, 7, 10];
+
 export function HeroSection({ pack }: { pack: AssetPack }) {
   const heroRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 810px)");
+    const sync = () => setIsDesktop(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  const bobbing = isDesktop && !prefersReducedMotion;
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -77,26 +93,49 @@ export function HeroSection({ pack }: { pack: AssetPack }) {
     >
       {/* Decorative layer keeps hero-relative coordinates; shrunk as one group below 810px. */}
       <div className="pointer-events-none absolute inset-0 max-[809px]:origin-top-left max-[809px]:scale-[0.42]">
-        {pack.heroDoodles.map((doodle) => (
-          <img
+        {/* The first doodle is the "// hi" brush ring. It gets the same playful hover as
+            the smileys - the parent layer is pointer-events-none, so it opts back in. */}
+        {pack.heroDoodles.map((doodle, i) => (
+          <motion.img
             key={doodle.src}
             src={doodle.src}
             alt=""
             width={Math.round(doodle.width)}
             height={Math.round(doodle.height)}
             draggable={false}
-            className="absolute max-w-none object-contain"
+            className={cn(
+              "absolute max-w-none object-contain",
+              i === 0 && "pointer-events-auto cursor-pointer",
+            )}
             style={{
               left: doodle.left,
               top: doodle.top,
               width: doodle.width,
               height: doodle.height,
-              transform: doodle.rotate ? `rotate(${doodle.rotate}deg)` : undefined,
+              rotate: doodle.rotate ? `${doodle.rotate}deg` : undefined,
             }}
+            onPointerEnter={
+              i === 0 && !prefersReducedMotion
+                ? (event) => {
+                    const r = event.currentTarget.getBoundingClientRect();
+                    sparkAt(r.left + r.width / 2, r.top + r.height / 2);
+                  }
+                : undefined
+            }
+            whileHover={
+              i === 0 && !prefersReducedMotion
+                ? { scale: 1.06, rotate: (doodle.rotate ?? 0) + 4 }
+                : undefined
+            }
+            transition={{ type: "spring", stiffness: 300, damping: 15 }}
           />
         ))}
 
-        {pack.heroOrnaments.map((ornament) => (
+        {/* Each string breathes a few pixels longer and shorter on its own timing, so the
+            row of ornaments drifts like things actually hanging rather than a fixed rail.
+            Desktop only: below 810px the whole layer is already scaled to 0.42 and the
+            movement would be too small to read. */}
+        {pack.heroOrnaments.map((ornament, i) => (
           <div
             key={ornament.src}
             className="absolute flex flex-col items-center"
@@ -108,9 +147,19 @@ export function HeroSection({ pack }: { pack: AssetPack }) {
               zIndex: ornament.zIndex,
             }}
           >
-            <div
-              className="w-[2px] shrink-0 rounded-[1px] bg-[#FF5E00]"
+            <motion.div
+              className="w-[2px] shrink-0 rounded-[1px] bg-ink"
               style={{ height: ornament.stringLength }}
+              animate={
+                bobbing
+                  ? { height: [ornament.stringLength, ornament.stringLength + BOB[i % BOB.length], ornament.stringLength] }
+                  : undefined
+              }
+              transition={
+                bobbing
+                  ? { duration: 3.6 + i * 0.55, repeat: Infinity, ease: "easeInOut", delay: i * 0.35 }
+                  : undefined
+              }
             />
             <img
               src={ornament.src}

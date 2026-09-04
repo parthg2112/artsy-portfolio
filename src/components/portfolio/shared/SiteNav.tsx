@@ -9,9 +9,9 @@ import { content } from "@/content/shreya";
 import { cn } from "@/lib/utils";
 import type { NavLink } from "@/types/portfolio";
 
-const PAPER = "#F7F2E6";
-const ORANGE = "#FF5E00";
-const BLUE = "#3B4AD6";
+const PAPER = "var(--additti-paper)";
+const ORANGE = "var(--additti-ink)";
+const BLUE = "var(--additti-blue)";
 
 interface SiteNavProps {
   packId: PackId;

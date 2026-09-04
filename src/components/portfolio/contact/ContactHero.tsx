@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 
 import { TallyEmbed } from "@/components/portfolio/contact/TallyEmbed";
-import { SmileyWinkIcon } from "@/components/portfolio/shared/icons";
+import { Smiley } from "@/components/portfolio/shared/Smiley";
 import { content } from "@/content/shreya";
 import { cn } from "@/lib/utils";
 
@@ -18,7 +18,7 @@ function HeadingWord({ text, width, italic }: { text: string; width: number; ita
     <span
       style={{ "--word-w": `${width}px` } as CSSProperties}
       className={cn(
-        "flex shrink-0 items-center justify-center whitespace-nowrap font-[family-name:var(--font-display)] font-normal text-[#FF5E00]",
+        "flex shrink-0 items-center justify-center whitespace-nowrap font-[family-name:var(--font-display)] font-normal text-ink",
         "min-[810px]:h-[111.3px] min-[810px]:w-[var(--word-w)] min-[810px]:text-[106px] min-[810px]:leading-[111.3px] min-[810px]:tracking-[-3.18px]",
         "max-[809px]:h-[44px] max-[809px]:text-[40px] max-[809px]:leading-[44px] max-[809px]:tracking-[-1.2px]",
         italic && "italic",
@@ -53,7 +53,7 @@ export function ContactHero() {
                 key={link.label}
                 href={link.href}
                 {...(link.external ? { target: "_blank", rel: "noreferrer noopener" } : {})}
-                className="whitespace-nowrap text-center font-[family-name:var(--font-body)] text-[16px] font-normal leading-[22.4px] text-[#FF5E00]"
+                className="whitespace-nowrap text-center font-[family-name:var(--font-body)] text-[16px] font-normal leading-[22.4px] text-ink"
               >
                 {link.label}
               </a>
@@ -61,13 +61,13 @@ export function ContactHero() {
 
             <div
               aria-hidden="true"
-              className="flex size-[109px] shrink-0 items-center justify-center overflow-clip p-[20px] text-[#3B4AD6] max-[809px]:size-[72px] max-[809px]:p-[14px]"
+              className="flex size-[109px] shrink-0 items-center justify-center overflow-clip p-[20px] text-blue max-[809px]:size-[72px] max-[809px]:p-[14px]"
             >
-              <SmileyWinkIcon className="h-full w-full" />
+              <Smiley icon="wink" className="h-full w-full" />
             </div>
           </div>
 
-          <p className="w-full max-w-[432px] text-center font-[family-name:var(--font-body)] text-[16px] font-normal leading-[22.4px] text-[#3B4AD6]">
+          <p className="w-full max-w-[432px] text-center font-[family-name:var(--font-body)] text-[16px] font-normal leading-[22.4px] text-blue">
             {intro}
           </p>
         </div>
@@ -78,14 +78,14 @@ export function ContactHero() {
           {tallyEmbedUrl ? (
             <TallyEmbed src={tallyEmbedUrl} title={`Contact ${content.name}`} />
           ) : (
-            <div className="flex w-full flex-col items-center gap-[12px] rounded-[8px] border border-[#FF5E00] bg-[#F7F2E6] px-[24px] py-[40px]">
-              <p className="text-center font-[family-name:var(--font-body)] text-[16px] leading-[22.4px] text-[#3B4AD6]">
+            <div className="flex w-full flex-col items-center gap-[12px] rounded-[8px] border border-ink bg-paper px-[24px] py-[40px]">
+              <p className="text-center font-[family-name:var(--font-body)] text-[16px] leading-[22.4px] text-blue">
                 The form lives on Tally and is not connected yet. Email is the fastest route
                 in the meantime.
               </p>
               <a
                 href={`mailto:${content.email}`}
-                className="font-[family-name:var(--font-display)] text-[28px] leading-[36.4px] text-[#FF5E00] min-[810px]:text-[40px] min-[810px]:leading-[46px]"
+                className="font-[family-name:var(--font-display)] text-[28px] leading-[36.4px] text-ink min-[810px]:text-[40px] min-[810px]:leading-[46px]"
               >
                 {content.email}
               </a>

@@ -1,42 +1,66 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import Script from "next/script";
+import { useEffect, useRef } from "react";
 
-const TALLY_ORIGIN = "https://tally.so";
-/** The form measures 440px inside the frame at every width; the slack absorbs
-    validation messages in case Tally never posts a height back. */
+/** Shown until Tally's loader reports the real height. The form measures ~440px. */
 const FALLBACK_HEIGHT = 480;
 
+declare global {
+  interface Window {
+    Tally?: { loadEmbeds: () => void };
+  }
+}
+
+/**
+ * `dynamicHeight=1` in the embed URL does nothing on its own - the iframe posts its
+ * height and Tally's own loader in the *parent* is what listens and resizes. That
+ * script is what actually sizes the form; without it the height stays pinned, which
+ * is why the earlier hand-rolled postMessage listener never fired.
+ *
+ * The form's fonts and colours are set inside Tally, not here: the embed is
+ * cross-origin, so no stylesheet of ours can reach into it. See docs/PORTFOLIO.md.
+ */
 export function TallyEmbed({ src, title }: { src: string; title: string }) {
   const ref = useRef<HTMLIFrameElement>(null);
-  const [height, setHeight] = useState(FALLBACK_HEIGHT);
 
+  // Why the form loaded only about half the time: `<Script onLoad>` fires once per page
+  // load, but `next/script` dedupes, so arriving at /contact through a client-side
+  // navigation re-mounts this iframe with `window.Tally` already present and nothing
+  // ever calls `loadEmbeds()` again - leaving an empty box. Call it on mount whenever
+  // the global is already there, and fall back to loading the form directly if the
+  // script is blocked or never arrives.
   useEffect(() => {
-    const onMessage = (event: MessageEvent) => {
-      if (event.origin !== TALLY_ORIGIN) return;
-      if (event.source !== ref.current?.contentWindow) return;
-      if (typeof event.data !== "string" || !event.data.includes("Tally.")) return;
-      try {
-        const { payload } = JSON.parse(event.data) as { payload?: { height?: number } };
-        if (typeof payload?.height === "number" && payload.height > 200) {
-          setHeight(Math.round(payload.height));
-        }
-      } catch {
-        // Not a message we own; leave the fallback height in place.
-      }
-    };
-    window.addEventListener("message", onMessage);
-    return () => window.removeEventListener("message", onMessage);
-  }, []);
+    if (window.Tally) window.Tally.loadEmbeds();
+
+    const fallback = window.setTimeout(() => {
+      const frame = ref.current;
+      if (frame && !frame.src) frame.src = src;
+    }, 2500);
+
+    return () => window.clearTimeout(fallback);
+  }, [src]);
 
   return (
-    <iframe
-      ref={ref}
-      src={src}
-      title={title}
-      loading="lazy"
-      className="w-full rounded-[8px] border border-[#FF5E00] bg-transparent transition-[height] duration-300"
-      style={{ height }}
-    />
+    <>
+      <iframe
+        ref={ref}
+        data-tally-src={src}
+        title={title}
+        loading="lazy"
+        height={FALLBACK_HEIGHT}
+        className="w-full rounded-[8px] bg-transparent"
+      />
+      <Script
+        src="https://tally.so/widgets/embed.js"
+        strategy="lazyOnload"
+        onLoad={() => window.Tally?.loadEmbeds()}
+        onError={() => {
+          // Script blocked: load the form directly so the page still works, just at
+          // the fallback height.
+          if (ref.current && !ref.current.src) ref.current.src = src;
+        }}
+      />
+    </>
   );
 }

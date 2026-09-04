@@ -133,7 +133,7 @@ export function HeroFolder({ pack }: { pack: AssetPack }) {
             fontFamily: "var(--font-display)",
             fontSize: 50,
             lineHeight: "60px",
-            color: "#3B4AD6",
+            color: "var(--additti-blue)",
           }}
         >
           {content.shortName}

@@ -4,10 +4,11 @@
 import { useCallback, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { motion, useReducedMotion, type Transition } from "motion/react";
 
+import { PixelReveal } from "@/components/portfolio/shared/PixelReveal";
 import { RevealText } from "@/components/portfolio/shared/RevealText";
 import { content } from "@/content/shreya";
 import type { AssetPack } from "@/types/portfolio";
-import { SmileyWinkIcon } from "@/components/portfolio/shared/icons";
+import { Smiley } from "@/components/portfolio/shared/Smiley";
 import { cn } from "@/lib/utils";
 
 
@@ -20,79 +21,28 @@ const APPEAR: Transition = {
 };
 
 
-const BODY_CLASS =
-  "font-[family-name:var(--font-body)] text-[12px] font-normal leading-[1.6em] tracking-[-0.02em] text-[#FF5E00]";
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
 
-/** Envelope/dossier scene authored at 318x398; Cover (z-1) hides the message layers at rest. */
-function DossierCard({ pack }: { pack: AssetPack }) {
+/**
+ * Art card in the top-left of /about, authored at 318x398.
+ *
+ * This was a three-layer dossier scene - a lime board, a folded letter carrying
+ * copy on its reverse, and a cover on top. The card never flips on this page, so
+ * every one of those layers was permanently hidden behind the cover; all that ever
+ * rendered was the cover image. It is a single framed image now.
+ */
+function ArtCard({ pack }: { pack: AssetPack }) {
   return (
     <div className="relative h-full w-full">
-      {/* Back - lime board behind the message */}
-      <div className="absolute left-[calc(50%-158.5px)] top-[calc(50%-198.5px)] h-[397px] w-[317px] rounded-[20px] bg-[#EBECB0] [transform:perspective(1200px)] [transform-style:preserve-3d]" />
-
-      {/* MESSAGE CAR - the folded letter, two white faces */}
-      <div className="absolute left-[calc(50%-133.5px)] top-[calc(50%-166.5px)] z-0 h-[333px] w-[267px] rounded-[20px] [transform:perspective(1200px)] [transform-style:preserve-3d]">
-        <div className="absolute inset-0 rounded-[20px] bg-white [transform:perspective(1200px)] [transform-style:preserve-3d]">
-          {/* Mirrored: this is the reverse face of the letter */}
-          <div className="absolute left-1/2 top-[47%] w-[224px] [transform:translate(-50%,-50%)_rotateY(180deg)]">
-            {content.about.dossier.copy.map((line, index) => (
-              <p key={line} className={cn(BODY_CLASS, index > 0 && "mt-[20px]")}>
-                {line}
-              </p>
-            ))}
-          </div>
-
-          <div className="absolute bottom-[19px] right-[35px] h-[97px] w-[96px] [transform:rotate(5deg)]">
-            <div className="h-full w-full [transform:rotate(2deg)]">
-              <img
-                src={pack.aboutHero.stamp}
-                alt=""
-                width={96}
-                height={97}
-                className="block h-full w-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="absolute inset-0 rounded-[20px] bg-white [transform:perspective(1200px)] [transform-style:preserve-3d]">
-          <div className="absolute right-[-26px] top-[84px] whitespace-pre [transform:rotate(90deg)]">
-            <p className="font-[family-name:var(--font-display)] text-[14px] font-normal leading-[1em] tracking-[0.1em] text-[#141414]">
-              {content.about.dossier.stampLabel}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Cover - the photo sleeve that sits on top at rest */}
-      <div className="absolute left-[calc(50%-158.5px)] top-[calc(50%-198.5px)] z-[1] h-[397px] w-[317px] rounded-[20px] [box-shadow:inset_0px_3px_2px_0px_rgba(255,255,255,0.2)] [transform:perspective(1200px)] [transform-style:preserve-3d]">
-        <img
-          src={pack.aboutHero.dossierCover}
-          alt=""
-          width={317}
-          height={397}
-          className="absolute inset-0 block h-full w-full rounded-[20px] object-cover"
-        />
-
-        <div className="absolute bottom-[31px] left-[22px] flex w-min flex-col items-start gap-[5px]">
-          <p className="whitespace-pre font-[family-name:var(--font-display)] text-[30px] font-normal leading-[36px] tracking-[0.1em] text-[#FFFDFC]">
-            CONFIDENTIAL FILES
-          </p>
-          <p className="whitespace-pre font-[family-name:var(--font-body)] text-[14px] font-normal leading-[16.8px] text-[#FFFDFC]">
-            Internal use only
-          </p>
-        </div>
-
-        <div className="absolute left-[219px] top-[26px] h-[27px] w-[86px]">
-          <p className="break-words font-[family-name:var(--font-logo)] text-[20px] font-normal leading-[1em] tracking-[-0.1em] text-[#3B4AD6] [font-variation-settings:'wght'_900,'slnt'_-3]">
-            {content.about.dossier.brand}
-          </p>
-        </div>
-      </div>
+      <PixelReveal
+        frontSrc={pack.aboutHero.dossierCover}
+        backSrc={pack.aboutHero.artReveal}
+        alt={`Artwork, dissolving to a portrait of ${content.name}`}
+        className="absolute left-[calc(50%-158.5px)] top-[calc(50%-198.5px)] h-[397px] w-[317px] rounded-[20px] border-[3px] border-ink shadow-[0_18px_44px_-18px_color-mix(in_srgb,var(--additti-blue)_60%,transparent)]"
+      />
     </div>
   );
 }
@@ -124,17 +74,21 @@ function cloneOffset(percent: number) {
 /** Framer code component: blurred+dimmed backdrop with a draggable lime-bordered lens. */
 function LensImage({ pack }: { pack: AssetPack }) {
   const frameRef = useRef<HTMLDivElement>(null);
-  const grabRef = useRef<{ offsetX: number; offsetY: number } | null>(null);
+  const grabRef = useRef<{ fx: number; fy: number } | null>(null);
   const [lens, setLens] = useState({ x: LENS_MAX / 2, y: LENS_MAX / 2 });
 
+  // The grab offset is stored as a FRACTION of the frame, not pixels. The frame carries a
+  // hover scale, so its rect can still be changing when a drag starts; a pixel offset
+  // frozen at pointerdown would then be measured against a different box every frame and
+  // the lens would jump. A fraction is dimensionless and survives the resize.
   const handlePointerDown = useCallback(
     (event: ReactPointerEvent<HTMLDivElement>) => {
       const frame = frameRef.current;
       if (!frame) return;
       const rect = frame.getBoundingClientRect();
       grabRef.current = {
-        offsetX: event.clientX - rect.left - (lens.x / 100) * rect.width,
-        offsetY: event.clientY - rect.top - (lens.y / 100) * rect.height,
+        fx: (event.clientX - rect.left) / rect.width - lens.x / 100,
+        fy: (event.clientY - rect.top) / rect.height - lens.y / 100,
       };
       event.currentTarget.setPointerCapture(event.pointerId);
     },
@@ -147,8 +101,8 @@ function LensImage({ pack }: { pack: AssetPack }) {
     if (!grab || !frame) return;
     const rect = frame.getBoundingClientRect();
     setLens({
-      x: clamp(((event.clientX - rect.left - grab.offsetX) / rect.width) * 100, 0, LENS_MAX),
-      y: clamp(((event.clientY - rect.top - grab.offsetY) / rect.height) * 100, 0, LENS_MAX),
+      x: clamp(((event.clientX - rect.left) / rect.width - grab.fx) * 100, 0, LENS_MAX),
+      y: clamp(((event.clientY - rect.top) / rect.height - grab.fy) * 100, 0, LENS_MAX),
     });
   }, []);
 
@@ -162,7 +116,17 @@ function LensImage({ pack }: { pack: AssetPack }) {
   return (
     <div
       ref={frameRef}
-      className="relative h-full min-h-[400px] w-full overflow-hidden rounded-[8px]"
+      /* The scale goes on the frame, never on the images: the blurred base and the sharp
+         clone inside the lens are separate layers that only register because they share
+         one untransformed box. Scaling either alone desynchronises the peephole. */
+      className={cn(
+        "relative h-full min-h-[400px] w-full overflow-hidden rounded-[8px]",
+        // Long expo-out rather than a short ease-out: at 300ms a 1.5% scale reads as a
+        // hard step. Same curve the polaroid reveal uses.
+        "transition-[transform,box-shadow] duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
+        "hover:scale-[1.035] hover:shadow-[0_28px_70px_-22px_color-mix(in_srgb,var(--additti-blue)_55%,transparent)]",
+        "motion-reduce:transition-none motion-reduce:hover:scale-100",
+      )}
     >
       {framesFor(pack).map((frame) => (
         <img
@@ -187,7 +151,7 @@ function LensImage({ pack }: { pack: AssetPack }) {
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
-        className="absolute h-[55%] w-[55%] cursor-grab touch-none select-none overflow-hidden rounded-[8px] border-[3px] border-[#EBECB0] active:cursor-grabbing"
+        className="absolute h-[55%] w-[55%] cursor-grab touch-none select-none overflow-hidden rounded-[8px] border-[3px] border-lime active:cursor-grabbing"
         style={{ left: `${lens.x}%`, top: `${lens.y}%` }}
       >
         {framesFor(pack).map((frame) => (
@@ -223,19 +187,22 @@ export function AboutHero({ pack }: { pack: AssetPack }) {
           <RevealText
             as="h1"
             text={content.about.heading}
-            className="text-right font-[family-name:var(--font-display)] text-[48px] font-normal leading-[1.05em] tracking-[-0.03em] text-[#FF5E00] min-[810px]:text-[90px] min-[1200px]:text-[106px]"
+            className="text-right font-[family-name:var(--font-display)] text-[48px] font-normal leading-[1.05em] tracking-[-0.03em] text-ink min-[810px]:text-[90px] min-[1200px]:text-[106px]"
           />
         </div>
 
         {/* Authored at scale 1 ≥1200px; Framer's tablet appear target is scale 0.7. */}
         <div className="absolute left-[33px] top-[24px] z-[1] h-[398px] w-[318px] max-[809px]:hidden min-[810px]:left-[-29px] min-[810px]:top-[72px] min-[810px]:scale-[0.7] min-[1200px]:left-[33px] min-[1200px]:top-[24px] min-[1200px]:scale-100">
+          {/* Hover has to be a motion prop, not a Tailwind class: motion writes `transform`
+              inline for the appear animation and an inline transform beats any class. */}
           <motion.div
             className="h-full w-full"
             initial={appearInitial}
             animate={{ opacity: 1, scale: 1 }}
             transition={APPEAR}
+            whileHover={prefersReducedMotion ? undefined : { y: -8, rotate: -1.5 }}
           >
-            <DossierCard pack={pack} />
+            <ArtCard pack={pack} />
           </motion.div>
         </div>
 
@@ -245,7 +212,7 @@ export function AboutHero({ pack }: { pack: AssetPack }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={APPEAR}
         >
-          <SmileyWinkIcon className="relative block size-[64px] min-[1200px]:size-[69px]" />
+          <Smiley icon="wink" className="relative block size-[64px] min-[1200px]:size-[69px]" />
         </motion.div>
 
         <motion.div

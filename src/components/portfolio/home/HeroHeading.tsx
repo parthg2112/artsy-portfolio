@@ -6,10 +6,7 @@ import { useEffect, useState } from "react";
 import { useReducedMotion } from "motion/react";
 
 import { content } from "@/content/shreya";
-import {
-  SmileyOutlineIcon,
-  SmileyWinkIcon,
-} from "@/components/portfolio/shared/icons";
+import { Smiley } from "@/components/portfolio/shared/Smiley";
 import { cn } from "@/lib/utils";
 import type { AssetPack } from "@/types/portfolio";
 
@@ -17,7 +14,7 @@ const CYCLE_MS = 935;
 const ROW_HEIGHT = 136;
 
 const TEXT_CLASS =
-  "flex h-[136px] shrink-0 items-center justify-center whitespace-nowrap font-[family-name:var(--font-display)] text-[106px] font-normal leading-[100.7px] tracking-[-3.18px] text-[#FF5E00]";
+  "flex h-[136px] shrink-0 items-center justify-center whitespace-nowrap font-[family-name:var(--font-display)] text-[106px] font-normal leading-[100.7px] tracking-[-3.18px] text-ink";
 
 /** All three sources stay mounted (preloaded); only visibility toggles, so the swap is a hard cut. */
 function Chip({ srcs, index }: { srcs: string[]; index: number }) {
@@ -84,15 +81,14 @@ export function HeroHeading({ pack }: { pack: AssetPack }) {
             <Chip key={`c-${i}`} srcs={pack.headingChips[slot.slot]} index={activeIndex} />
           );
         }
-        const Icon = slot.icon === "wink" ? SmileyWinkIcon : SmileyOutlineIcon;
         return (
           <span
             key={`e-${i}`}
             aria-hidden="true"
-            className="z-[2] block shrink-0 text-[#3B4AD6]"
+            className="z-[2] block shrink-0 text-blue"
             style={{ width: slot.size, height: slot.size }}
           >
-            <Icon className="h-full w-full" />
+            <Smiley icon={slot.icon} className="h-full w-full" />
           </span>
         );
       })}

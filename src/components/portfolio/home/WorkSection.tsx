@@ -5,7 +5,7 @@ import { content } from "@/content/shreya";
 import { cn } from "@/lib/utils";
 import type { AssetPack, ImageAsset, Project } from "@/types/portfolio";
 
-const ORANGE = "#FF5E00";
+const ORANGE = "var(--additti-ink)";
 
 /**
  * The grid sizes each card as a percentage of the 1345px reference container and lets
@@ -24,7 +24,7 @@ interface CardLayout {
   accent: string;
 }
 
-const BLUE = "#3B4AD6";
+const BLUE = "var(--additti-blue)";
 
 const LAYOUTS: CardLayout[] = [
   // Atlas: cream card with blue streets, so an orange edge.
@@ -73,13 +73,17 @@ function Card({ project, cover, layout, className }: CardProps) {
         className,
       )}
     >
+      {/* Hover is done with CSS transitions rather than `motion` so this stays a server
+          component, and because the anchor already carries the project-scale transform -
+          a motion transform on the same element would overwrite it. Only the children
+          move, so the outer box that sets the row height never changes. */}
       <a
         href={project.href}
         target="_blank"
         rel="noreferrer noopener"
         aria-label={`${project.title}. ${project.blurb}`}
         className={cn(
-          "flex h-full w-full flex-col items-start gap-3",
+          "group flex h-full w-full flex-col items-start gap-3",
           // Desktop height must stay content-driven so the image's aspect ratio
           // (and therefore the row height) grows with the container.
           "min-[810px]:h-auto min-[810px]:w-full min-[810px]:origin-center",
@@ -89,10 +93,16 @@ function Card({ project, cover, layout, className }: CardProps) {
       >
         {/* The accent border is what lifts these off the paper grid. */}
         <div
-          className="w-full overflow-hidden rounded-lg border-[3px] max-[809px]:h-[262px] min-[810px]:aspect-[var(--img-ar)]"
+          className={cn(
+            "w-full overflow-hidden rounded-lg border-[3px] max-[809px]:h-[262px] min-[810px]:aspect-[var(--img-ar)]",
+            "transition-[transform,box-shadow] duration-300 ease-out will-change-transform",
+            "group-hover:-translate-y-2 group-hover:scale-[1.02] group-hover:shadow-[var(--card-shadow)]",
+            "motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 motion-reduce:group-hover:scale-100",
+          )}
           style={
             {
               "--img-ar": `${cover.width} / ${cover.height}`,
+              "--card-shadow": `0 18px 38px -12px color-mix(in srgb, ${layout.accent} 45%, transparent)`,
               borderColor: layout.accent,
               boxSizing: "border-box",
             } as CSSProperties
@@ -103,10 +113,15 @@ function Card({ project, cover, layout, className }: CardProps) {
             alt={project.title}
             width={Math.round(cover.width)}
             height={Math.round(cover.height)}
-            className="h-full w-full rounded-lg object-cover"
+            className={cn(
+              "h-full w-full rounded-lg object-cover",
+              // Drifts under the fixed border box, which keeps its `overflow-hidden`.
+              "transition-transform duration-300 ease-out group-hover:scale-[1.06]",
+              "motion-reduce:transition-none motion-reduce:group-hover:scale-100",
+            )}
           />
         </div>
-        <div>
+        <div className="transition-transform duration-300 ease-out group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0">
           {/* 24/30 at 390px, 28/35 from 810px up - both measured. */}
           <h5
             className="text-[24px] leading-[30px] min-[810px]:text-[28px] min-[810px]:leading-[35px]"
@@ -129,7 +144,7 @@ export function WorkSection({ pack }: { pack: AssetPack }) {
   const [one, two, three, four, five] = cards;
 
   return (
-    <section className="relative z-[2] flex items-center justify-center overflow-clip px-4 py-14 min-[810px]:px-10 min-[810px]:py-20">
+    <section id="work" className="relative z-[2] flex items-center justify-center overflow-clip px-4 py-14 min-[810px]:px-10 min-[810px]:py-20">
       <div className="flex w-full max-w-[1600px] flex-col items-center justify-center gap-6 overflow-clip min-[810px]:gap-10">
         <div className={ROW}>
           <Card {...one} />
