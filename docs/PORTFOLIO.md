@@ -65,13 +65,18 @@ sound"; the first click on the document is both the cue and the user gesture bro
 require before audio may play, so autoplay is never attempted. A `✕` opts out and is
 remembered in `sessionStorage`.
 
-**No audio or cover art is in this repo, and none should be.** The queue in
-`content.tracks` is metadata only; `public/audio/` is gitignored. Drop
-`sunflower.mp3` and `lemonade.mp3` in there and the player appears by itself. Without
-them it renders nothing at all - it waits for the audio element to report
-`readyState >= 1` before it will even show the hint, so a fresh clone never displays a
-player that could not play anything. Cover art is the same story: `Track.artwork` is
-optional and a palette tile is drawn from the track id unless a file is supplied.
+Audio lives in `public/audio/`, named to match the `url` values in `content.tracks`. The
+two files are committed so the player works in production as well as locally; they are
+commercial recordings, kept here by an explicit decision, so treat this repo as carrying
+licensed material and think before making it public. Cover art is *not* committed:
+`Track.artwork` is optional and a palette tile is drawn from the track id instead.
+
+Remove the files and nothing breaks - the player renders nothing at all rather than a
+dead control, because it waits for the audio element to report `readyState >= 1` before
+it will even show the hint. That is also the fallback if a file 404s.
+
+They are 6.2 MB and 8.3 MB. On a phone that is a real download; trimming to a 60-90s
+excerpt would cost nothing visible and save most of it.
 
 Three traps live in it, all found by testing rather than reading:
 

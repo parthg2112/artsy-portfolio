@@ -54,6 +54,3 @@ docs/design-references/
 
 .vercel
 .env*
-
-# Licensed recordings. Never commit audio - the player reads whatever is dropped here.
-public/audio/
